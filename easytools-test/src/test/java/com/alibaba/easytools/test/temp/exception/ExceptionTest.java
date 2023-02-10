@@ -21,6 +21,11 @@ public class ExceptionTest extends SimpleBaseTest {
      */
     @Test
     public void printStack() {
+        try {
+            Storey1.test();
+            Storey1.testException();
+        } catch (Exception e) {
+        }
         long start1 = System.currentTimeMillis();
         for (int i = 0; i < RUN_COUNT; i++) {
             log.info(Storey1.test());
@@ -35,7 +40,7 @@ public class ExceptionTest extends SimpleBaseTest {
             }
         }
         long end = System.currentTimeMillis();
-        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start1);
+        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start2);
     }
 
     /**
@@ -44,6 +49,12 @@ public class ExceptionTest extends SimpleBaseTest {
      */
     @Test
     public void print() {
+        try {
+            Storey1.test();
+            Storey1.testException();
+        } catch (Exception e) {
+        }
+
         long start1 = System.currentTimeMillis();
         for (int i = 0; i < RUN_COUNT; i++) {
             log.info(Storey1.test());
@@ -58,7 +69,7 @@ public class ExceptionTest extends SimpleBaseTest {
             }
         }
         long end = System.currentTimeMillis();
-        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start1);
+        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start2);
     }
 
     /**
@@ -67,6 +78,12 @@ public class ExceptionTest extends SimpleBaseTest {
      */
     @Test
     public void noPrint() {
+        try {
+            Storey1.test();
+            Storey1.testException();
+        } catch (Exception e) {
+        }
+
         long start1 = System.currentTimeMillis();
         for (int i = 0; i < RUN_COUNT; i++) {
             Storey1.test();
@@ -80,7 +97,7 @@ public class ExceptionTest extends SimpleBaseTest {
             }
         }
         long end = System.currentTimeMillis();
-        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start1);
+        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start2);
     }
 
 
@@ -90,6 +107,12 @@ public class ExceptionTest extends SimpleBaseTest {
      */
     @Test
     public void noPrintCloseStackTrace() {
+        try {
+            Storey1.test();
+            Storey1.testException();
+        } catch (Exception e) {
+        }
+
         long start1 = System.currentTimeMillis();
         for (int i = 0; i < RUN_COUNT; i++) {
             Storey1.test();
@@ -103,7 +126,7 @@ public class ExceptionTest extends SimpleBaseTest {
             }
         }
         long end = System.currentTimeMillis();
-        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start1);
+        log.info("普通返回耗时：{},异常返回耗时:{}", start2 - start1, end - start2);
     }
 
 
