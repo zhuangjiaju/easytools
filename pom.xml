@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.alibaba.easytools</groupId>
+    <groupId>cn.easytools</groupId>
     <artifactId>easytools-parent</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
@@ -39,37 +39,37 @@
 
             <!-- 自带的包 -->
             <dependency>
-                <groupId>com.alibaba.easytools</groupId>
+                <groupId>cn.easytools</groupId>
                 <artifactId>easytools-tools-base</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.alibaba.easytools</groupId>
+                <groupId>cn.easytools</groupId>
                 <artifactId>easytools-tools-common</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.alibaba.easytools</groupId>
+                <groupId>cn.easytools</groupId>
                 <artifactId>easytools-web-api</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.alibaba.easytools</groupId>
+                <groupId>cn.easytools</groupId>
                 <artifactId>easytools-start</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.alibaba.easytools</groupId>
+                <groupId>cn.easytools</groupId>
                 <artifactId>easytools-domain-course-api</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.alibaba.easytools</groupId>
+                <groupId>cn.easytools</groupId>
                 <artifactId>easytools-domain-course-core</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.alibaba.easytools</groupId>
+                <groupId>cn.easytools</groupId>
                 <artifactId>easytools-domain-course-repository</artifactId>
                 <version>${revision}</version>
             </dependency>

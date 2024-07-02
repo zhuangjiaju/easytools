@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>com.alibaba.easytools</groupId>
+        <groupId>cn.easytools</groupId>
         <artifactId>easytools-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
@@ -15,7 +15,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.alibaba.easytools</groupId>
+            <groupId>cn.easytools</groupId>
             <artifactId>easytools-start</artifactId>
         </dependency>
         <dependency>
