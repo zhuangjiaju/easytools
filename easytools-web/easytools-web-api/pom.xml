@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>cn.easytools</groupId>
+        <groupId>com.github.zhuangjiaju</groupId>
         <artifactId>easytools-web</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
@@ -15,11 +15,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.easytools</groupId>
+            <groupId>com.github.zhuangjiaju</groupId>
             <artifactId>easytools-tools-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.easytools</groupId>
+            <groupId>com.github.zhuangjiaju</groupId>
             <artifactId>easytools-domain-course-api</artifactId>
         </dependency>
         <dependency>
