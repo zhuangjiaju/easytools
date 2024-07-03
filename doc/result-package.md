@@ -747,4 +747,4 @@ public class PageResult<T> implements Serializable, Result<List<T>> {
 
 ## 写在最后
 
-你是否在为找不到完整的项目搭建的最佳实践而烦恼呢？这里给你推荐一个非常完成的开源模板：[https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools)
+你是否在为找不到完整的项目搭建的最佳实践而烦恼呢？这里给你推荐一个非常完整的开源模板：[https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools)
