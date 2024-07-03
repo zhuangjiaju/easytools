@@ -1,8 +1,15 @@
 package com.github.zhuangjiaju.easytools.tools.base.wrapper.result;
 
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import javax.validation.constraints.NotNull;
+
 import com.github.zhuangjiaju.easytools.tools.base.constant.EasyToolsConstant;
-import com.github.zhuangjiaju.easytools.tools.base.enums.BaseErrorEnum;
-import com.github.zhuangjiaju.easytools.tools.base.excption.CommonErrorEnum;
+import com.github.zhuangjiaju.easytools.tools.base.enums.BaseExceptionEnum;
 import com.github.zhuangjiaju.easytools.tools.base.wrapper.Result;
 import com.github.zhuangjiaju.easytools.tools.base.wrapper.param.PageQueryParam;
 import lombok.AllArgsConstructor;
@@ -11,16 +18,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotNull;
-
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 /**
- * data的返回对象
+ * 分页的返回对象
  *
  * @author JiaJu Zhuang
  */
@@ -169,12 +168,12 @@ public class PageResult<T> implements Serializable, Result<List<T>> {
     /**
      * 返回查询异常信息
      *
-     * @param errorEnum 错误枚举
+     * @param baseException 错误枚举
      * @param <T>       返回的对象
      * @return 分页返回对象
      */
-    public static <T> PageResult<T> error(BaseErrorEnum errorEnum) {
-        return error(errorEnum.getCode(), errorEnum.getDescription());
+    public static <T> PageResult<T> error(BaseExceptionEnum baseException) {
+        return error(baseException.getCode(), baseException.getDescription());
     }
 
     /**

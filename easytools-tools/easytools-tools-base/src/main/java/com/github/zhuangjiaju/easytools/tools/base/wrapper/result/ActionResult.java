@@ -5,8 +5,7 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 
 import com.github.zhuangjiaju.easytools.tools.base.constant.EasyToolsConstant;
-import com.github.zhuangjiaju.easytools.tools.base.enums.BaseErrorEnum;
-import com.github.zhuangjiaju.easytools.tools.base.excption.CommonErrorEnum;
+import com.github.zhuangjiaju.easytools.tools.base.enums.BaseExceptionEnum;
 import com.github.zhuangjiaju.easytools.tools.base.wrapper.Result;
 
 import lombok.AllArgsConstructor;
@@ -38,7 +37,7 @@ public class ActionResult implements Serializable, Result {
     /**
      * 错误编码
      *
-     * @see CommonErrorEnum
+     * @see BaseExceptionEnum
      */
     private String errorCode;
     /**
@@ -108,21 +107,21 @@ public class ActionResult implements Serializable, Result {
     /**
      * 返回失败
      *
-     * @param errorEnum 错误枚举
+     * @param baseException 错误枚举
      * @return 运行结果
      */
-    public static ActionResult fail(BaseErrorEnum errorEnum) {
-        return fail(errorEnum.getCode(), errorEnum.getDescription());
+    public static ActionResult fail(BaseExceptionEnum baseException) {
+        return fail(baseException.getCode(), baseException.getDescription());
     }
 
     /**
      * 返回失败
      *
-     * @param errorEnum 错误枚举
+     * @param baseException 错误枚举
      * @return 运行结果
      */
-    public static ActionResult fail(BaseErrorEnum errorEnum, String errorMessage) {
-        return fail(errorEnum.getCode(), errorMessage);
+    public static ActionResult fail(BaseExceptionEnum baseException, String errorMessage) {
+        return fail(baseException.getCode(), errorMessage);
     }
 
 }

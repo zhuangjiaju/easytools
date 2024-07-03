@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Jiaju Zhuang
  */
 @Slf4j
-@RestController
+@RestController("/api/web/result")
 @RequiredArgsConstructor
 public class ResultWebController {
     private final ResultDemoService resultDemoService;

@@ -9,10 +9,8 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
 
 import com.github.zhuangjiaju.easytools.tools.base.constant.EasyToolsConstant;
-import com.github.zhuangjiaju.easytools.tools.base.enums.BaseErrorEnum;
-import com.github.zhuangjiaju.easytools.tools.base.excption.CommonErrorEnum;
+import com.github.zhuangjiaju.easytools.tools.base.enums.BaseExceptionEnum;
 import com.github.zhuangjiaju.easytools.tools.base.wrapper.Result;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * data的返回对象
+ * 列表的返回对象
  *
  * @author Jiaju Zhuang
  */
@@ -42,7 +40,7 @@ public class ListResult<T> implements Serializable, Result<T> {
     /**
      * 错误编码
      *
-     * @see CommonErrorEnum
+     * @see BaseExceptionEnum
      */
     private String errorCode;
     /**
@@ -103,12 +101,12 @@ public class ListResult<T> implements Serializable, Result<T> {
     /**
      * 构建异常返回列表
      *
-     * @param errorEnum 错误枚举
+     * @param baseException 错误枚举
      * @param <T>       需要构建的对象类型
      * @return 返回的列表
      */
-    public static <T> ListResult<T> error(BaseErrorEnum errorEnum) {
-        return error(errorEnum.getCode(), errorEnum.getDescription());
+    public static <T> ListResult<T> error(BaseExceptionEnum baseException) {
+        return error(baseException.getCode(), baseException.getDescription());
     }
 
     /**

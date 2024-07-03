@@ -1,4 +1,4 @@
-package com.github.zhuangjiaju.easytools.tools.base;
+package com.github.zhuangjiaju.easytools.tools.base.wrapper;
 
 import java.io.Serializable;
 
