@@ -50,7 +50,7 @@
             </dependency>
             <dependency>
                 <groupId>com.github.zhuangjiaju</groupId>
-                <artifactId>easytools-web-api</artifactId>
+                <artifactId>easytools-web-web</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -73,6 +73,21 @@
                 <artifactId>easytools-domain-course-repository</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.zhuangjiaju</groupId>
+                <artifactId>easytools-domain-demo-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.zhuangjiaju</groupId>
+                <artifactId>easytools-domain-demo-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.zhuangjiaju</groupId>
+                <artifactId>easytools-domain-demo-repository</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
             <dependency>
@@ -86,6 +101,12 @@
                 <version>3.5.10</version>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>3.0.2</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -174,10 +195,10 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>/com/alibaba/easytools/**/test/**/*.java</include>
+                        <include>/com/github/zhuangjiaju/easytools/**/test/**/*.java</include>
                     </includes>
                     <excludes>
-                        <include>/com/alibaba/easytools/**/test/temp/**/*.java</include>
+                        <include>/com/github/zhuangjiaju/easytools/**/test/temp/**/*.java</include>
                     </excludes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>

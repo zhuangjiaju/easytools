@@ -1,9 +1,8 @@
 package com.github.zhuangjiaju.easytools.tools.base.excption;
 
-
-import com.github.zhuangjiaju.easytools.tools.base.enums.BaseErrorEnum;
-
+import com.github.zhuangjiaju.easytools.tools.base.enums.BaseExceptionEnum;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 业务异常。简单的说就是需要人工介入的异常叫做系统异常。
@@ -11,19 +10,32 @@ import lombok.Getter;
  * @author Jiaju Zhuang
  */
 @Getter
+@Setter
 public class SystemException extends RuntimeException {
-
     /**
      * 异常的编码
      */
     private String code;
 
     public SystemException(String message) {
-        this(CommonErrorEnum.COMMON_SYSTEM_ERROR, message);
+        this(CommonExceptionEnum.SYSTEM_ERROR, message);
     }
 
     public SystemException(String message, Throwable throwable) {
-        this(CommonErrorEnum.COMMON_SYSTEM_ERROR, message, throwable);
+        this(CommonExceptionEnum.SYSTEM_ERROR, message, throwable);
+    }
+
+    public SystemException(BaseExceptionEnum exceptionEnum, String message) {
+        this(exceptionEnum.getCode(), message);
+    }
+
+    public SystemException(BaseExceptionEnum exceptionEnum, String message, Throwable throwable) {
+        super(message, throwable);
+        this.code = exceptionEnum.getCode();
+    }
+
+    public SystemException(BaseExceptionEnum exceptionEnum) {
+        this(exceptionEnum.getCode(), exceptionEnum.getDescription());
     }
 
     public SystemException(String code, String message) {
@@ -31,21 +43,23 @@ public class SystemException extends RuntimeException {
         this.code = code;
     }
 
-    public SystemException(BaseErrorEnum errorEnum, String message, Throwable throwable) {
-        super(message, throwable);
-        this.code = errorEnum.getCode();
+    public static SystemException of(String message) {
+        return new SystemException(message);
     }
 
-    public SystemException(BaseErrorEnum errorEnum) {
-        this(errorEnum.getCode(), errorEnum.getDescription());
+    public static SystemException of(String code, String message) {
+        return new SystemException(code, message);
     }
 
-    public SystemException(BaseErrorEnum errorEnum, String message) {
-        this(errorEnum.getCode(), message);
+    public static SystemException of(BaseExceptionEnum exceptionEnum, String message, Throwable throwable) {
+        return new SystemException(exceptionEnum, message, throwable);
     }
 
-    public SystemException(BaseErrorEnum errorEnum, Throwable throwable) {
-        super(errorEnum.getDescription(), throwable);
-        this.code = errorEnum.getCode();
+    public static SystemException of(BaseExceptionEnum exceptionEnum) {
+        return new SystemException(exceptionEnum);
+    }
+
+    public static SystemException of(BaseExceptionEnum exceptionEnum, String message) {
+        return new SystemException(exceptionEnum, message);
     }
 }

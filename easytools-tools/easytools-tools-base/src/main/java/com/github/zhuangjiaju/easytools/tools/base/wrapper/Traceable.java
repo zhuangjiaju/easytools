@@ -3,7 +3,7 @@ package com.github.zhuangjiaju.easytools.tools.base.wrapper;
 /**
  * 是否可以跟踪
  *
- * @author 是仪
+ * @author Jiaju Zhuang
  */
 public interface Traceable {
     /**

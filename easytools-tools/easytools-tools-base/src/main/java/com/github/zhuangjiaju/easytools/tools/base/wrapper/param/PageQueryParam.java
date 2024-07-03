@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,7 @@ import java.util.List;
 /**
  * 分页查询的参数
  *
- * @author zhuangjiaju
- * @date 2021/06/26
+ * @author Jiaju Zhuang
  */
 @Data
 @SuperBuilder

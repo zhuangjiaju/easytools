@@ -22,7 +22,7 @@ import lombok.experimental.SuperBuilder;
 /**
  * data的返回对象
  *
- *@author Jiaju Zhuang
+ * @author Jiaju Zhuang
  */
 @Data
 @SuperBuilder
@@ -37,7 +37,7 @@ public class ListResult<T> implements Serializable, Result<T> {
      */
     @NotNull
     @Builder.Default
-    private Boolean success= Boolean.TRUE;
+    private Boolean success = Boolean.TRUE;
 
     /**
      * 错误编码
@@ -57,7 +57,6 @@ public class ListResult<T> implements Serializable, Result<T> {
      * traceId
      */
     private String traceId;
-
 
     private ListResult(List<T> data) {
         this();

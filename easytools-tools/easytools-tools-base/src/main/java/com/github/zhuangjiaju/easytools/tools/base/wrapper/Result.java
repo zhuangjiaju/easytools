@@ -1,8 +1,7 @@
 package com.github.zhuangjiaju.easytools.tools.base.wrapper;
 
 /**
- * @author qiuyuyu
- * @date 2022/01/20
+ * @author Jiaju Zhuang
  */
 public interface Result<T> extends Traceable{
     /**

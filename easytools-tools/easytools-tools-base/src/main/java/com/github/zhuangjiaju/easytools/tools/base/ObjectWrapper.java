@@ -9,7 +9,7 @@ import lombok.Setter;
 /**
  * 封装一个对象
  *
- * @author 是仪
+ * @author Jiaju Zhuang
  */
 @Getter
 @Setter

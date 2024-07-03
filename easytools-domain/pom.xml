@@ -14,6 +14,7 @@
 
     <modules>
         <module>easytools-domain-course</module>
+        <module>easytools-domain-demo</module>
     </modules>
 
 </project>

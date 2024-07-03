@@ -3,7 +3,7 @@ package com.github.zhuangjiaju.easytools.tools.base.enums;
 /**
  * 排序方向的枚举
  *
- * @author 是仪
+ * @author Jiaju Zhuang
  */
 public enum OrderByDirectionEnum implements BaseEnum<String> {
 

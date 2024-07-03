@@ -15,3 +15,12 @@ java web工程的最佳实践
 
 * 每个人写出一样的代码 非常容易看懂别人的代码
 * 不用看实现就敢用别人的方法
+
+# 帮忙点个⭐Star
+
+开源不易，如果觉得EasyTools对您的工作还是有帮助的话，请帮忙在<a target="_blank" href='https://github.com/zhuangjiaju/easytools'><img src="https://img.shields.io/github/stars/zhuangjiaju/easytools.svg?style=flat-square&label=Stars&logo=github" alt="github star"/></a>
+的右上角点个⭐Star，您的支持是使EasyTools变得更好最大的动力。
+
+# 目录
+## 项目规范
+* [使用统一 `Reuslt` 对象去封装返回值](doc/result-package.md)

@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.zhuangjiaju</groupId>
-            <artifactId>easytools-web-api</artifactId>
+            <artifactId>easytools-web-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.zhuangjiaju</groupId>

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 查询的参数
  *
- * @author zhuangjiaju
+ * @author Jiaju Zhuang
  * @date 2021/06/26
  */
 @Data
