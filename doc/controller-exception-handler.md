@@ -17,8 +17,7 @@ public ActionResult baseCase() {
     try {
         // 业务处理
         // ...
-    } catch (BusinessException e) {
-        log.info("业务发生异常", e);
+    } catch (BusinessException e) {log.info("业务发生异常", e);
         return ActionResult.fail(e.getCode(), e.getMessage());
     } catch (Exception e) {
         log.info("业务发生异常", e);
