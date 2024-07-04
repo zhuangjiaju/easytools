@@ -2,7 +2,7 @@
 
 ## 前言
 
-今天要给大家介绍的是如果告别业务代码中大量的try-catch，让你专注于业务代码而不用管异常处理。
+今天要给大家介绍的是如何告别业务代码中大量的try-catch，让你专注于业务代码而不用考虑异常处理。
 
 大家是不是在业务代码里面经常看到这种代码：
 
@@ -40,8 +40,7 @@ public ActionResult baseCase() {
 
 案例地址： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/exception/ExceptionWebController.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/exception/ExceptionWebController.java)
 
-这里需要配合 "统一 `Reuslt` 对象去封装返回值"
-一起使用,可以打开 [https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools) 配合使用
+这里需要配合 "统一 `Reuslt` 对象去封装返回值" 一起使用,可以打开 [https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools) 找到案例
 
 ### 业务代码中直接抛出异常即可
 
