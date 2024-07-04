@@ -28,6 +28,7 @@ public class ExceptionWebController {
      */
     @GetMapping("business-exception")
     public ActionResult businessException() {
+        // 直接抛出异常，不用返回ActionResult
         throw BusinessException.of("业务异常");
     }
 
@@ -38,6 +39,7 @@ public class ExceptionWebController {
      */
     @GetMapping("system-exception")
     public ActionResult systemException() {
+        // 直接抛出异常，不用返回ActionResult
         throw SystemException.of("系统异常");
     }
 

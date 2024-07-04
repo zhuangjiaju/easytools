@@ -38,6 +38,7 @@ public class ControllerExceptionHandler {
 
     /**
      * 业务异常
+     * 这里整合了spring常见的异常
      *
      * @param request   request
      * @param exception exception

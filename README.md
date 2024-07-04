@@ -1,4 +1,4 @@
-# easytools
+_# easytools
 
 java web工程的最佳实践
 
@@ -24,3 +24,4 @@ java web工程的最佳实践
 # 目录
 ## 项目规范
 * [使用统一 `Reuslt` 对象去封装返回值](doc/result-package.md)
+* [告别代码中遍地的 try-catch，使用 spring 全局统一异常处理](doc/controller-exception-handler.md)

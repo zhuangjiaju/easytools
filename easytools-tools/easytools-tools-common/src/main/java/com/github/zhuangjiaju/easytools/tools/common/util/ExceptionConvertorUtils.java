@@ -33,7 +33,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 /**
- * 转换工具类
+ * 转换异常工具类
  *
  * @author Jiaju Zhuang
  */

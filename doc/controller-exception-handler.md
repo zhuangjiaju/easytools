@@ -1,4 +1,4 @@
-# 告别 try-catch，全局统一异常处理
+# 告别代码中遍地的 try-catch，使用 spring 全局统一异常处理
 
 ## 前言
 
@@ -39,728 +39,429 @@ public ActionResult baseCase() {
 
 ### 直接上案例
 
-案例地址： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/result/ResultWebController.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/result/ResultWebController.java)
+案例地址： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/exception/ExceptionWebController.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/exception/ExceptionWebController.java)
+
+这里需要配合 "统一 `Reuslt` 对象去封装返回值"
+一起使用,可以打开 [https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools) 配合使用
+
+### 业务代码中直接抛出异常即可
 
 ```java
  /**
- * 创建一条数据
+ * demo/异常模板
  *
- * @param request 创建参数
- * @return id
+ * @author Jiaju Zhuang
  */
-@PostMapping("create")
-public DataResult<Long> create(@Valid @RequestBody ResultCreateRequest request) {
-    return DataResult.of(resultDemoService.create(resultWebConverter.request2param(request)));
-}
+@Slf4j
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/web/result")
+public class ExceptionWebController {
 
-/**
- * 查询一条数据
- *
- * @param id 主键
- * @return
- */
-@GetMapping("query")
-public DataResult<ResultQueryVO> query(@Valid @NotNull Long id) {
-    return DataResult.of(resultWebConverter.dto2voQuery(resultDemoService.queryExistent(id, null)));
-}
+    /**
+     * 测试业务异常
+     *
+     * @return
+     */
+    @GetMapping("business-exception")
+    public ActionResult businessException() {
+        // 直接抛出异常，不用返回ActionResult
+        throw BusinessException.of("业务异常");
+    }
 
-/**
- * 分页查询列表数据
- *
- * @param request request
- * @return
- */
-@GetMapping("page-query")
-public PageResult<ResultPageQueryVO> pageQuery(@Valid ResultPageQueryRequest request) {
-    return resultDemoService.pageQuery(resultWebConverter.request2param(request), null)
-        .map(resultWebConverter::dto2voPageQuery);
+    /**
+     * 测试系统异常
+     *
+     * @return
+     */
+    @GetMapping("system-exception")
+    public ActionResult systemException() {
+        // 直接抛出异常，不用返回ActionResult
+        throw SystemException.of("系统异常");
+    }
+
 }
 
 ```
 
-返回结果：
-
+返回的结果：
 ```json
 {
-  "success": true,
-  "errorCode": null,
-  "errorMessage": null,
-  "data": 1
+    "success": false,
+    "errorCode": "BUSINESS_ERROR",
+    "errorMessage": "业务异常",
+    "traceId": null
+}
+
+{
+  "success": false,
+  "errorCode": "SYSTEM_ERROR",
+  "errorMessage": "系统开小差啦，请尝试刷新页面或者联系管理员",
+  "traceId": null
 }
 ```
 
-### ActionResult 用于封装没有任何返回值
+输出的异常日志：
+```java
+2024-07-04T20:54:40.903+08:00  INFO 17360 --- [nio-8080-exec-1] c.g.z.e.w.c.h.ControllerExceptionHandler : 发生业务异常/api/web/result/business-exception:ActionResult(success=false, errorCode=BUSINESS_ERROR, errorMessage=业务异常, traceId=null)
+
+com.github.zhuangjiaju.easytools.tools.base.excption.BusinessException: 业务异常
+	at com.github.zhuangjiaju.easytools.tools.base.excption.BusinessException.of(BusinessException.java:47)
+	at com.github.zhuangjiaju.easytools.web.web.contoller.exception.ExceptionWebController.businessException(ExceptionWebController.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+2024-07-04T20:54:47.361+08:00 ERROR 17360 --- [nio-8080-exec-2] c.g.z.e.w.c.h.ControllerExceptionHandler : 发生业务异常/api/web/result/system-exception:ActionResult(success=false, errorCode=SYSTEM_ERROR, errorMessage=系统开小差啦，请尝试刷新页面或者联系管理员, traceId=null)
+
+com.github.zhuangjiaju.easytools.tools.base.excption.SystemException: 系统异常
+	at com.github.zhuangjiaju.easytools.tools.base.excption.SystemException.of(SystemException.java:47)
+	at com.github.zhuangjiaju.easytools.web.web.contoller.exception.ExceptionWebController.systemException(ExceptionWebController.java:40)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+```
+
+
+### 使用 ExceptionHandler 拦截业务中抛出异常
+
+所有的异常转换 由`ExceptionConvertorUtils` 统一转换成输出 `ActionResult` 对象，并返回给前端
 
 ```java
 /**
- * action的返回对象
+ * 拦截Controller异常
  *
  * @author Jiaju Zhuang
  */
-@Data
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ActionResult implements Serializable, Result {
-    private static final long serialVersionUID = EasyToolsConstant.SERIAL_VERSION_UID;
+@ControllerAdvice
+@Slf4j
+public class ControllerExceptionHandler {
+
     /**
-     * 是否成功
+     * 业务异常
+     * 这里整合了spring常见的异常
      *
-     * @mock true
+     * @param request   request
+     * @param exception exception
+     * @return return
      */
-    @NotNull
-    @Builder.Default
-    private Boolean success = Boolean.TRUE;
-
-    /**
-     * 错误编码
-     *
-     * @see BaseExceptionEnum
-     */
-    private String errorCode;
-    /**
-     * 错误信息
-     */
-    private String errorMessage;
-
-    /**
-     * traceId
-     */
-    private String traceId;
-
-    /**
-     * 返回成功
-     *
-     * @return 运行结果
-     */
-    public static ActionResult isSuccess() {
-        return new ActionResult();
-    }
-
-    @Override
-    public boolean success() {
-        return success;
-    }
-
-    @Override
-    public void success(boolean success) {
-        this.success = success;
-    }
-
-    @Override
-    public String errorCode() {
-        return errorCode;
-    }
-
-    @Override
-    public void errorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    @Override
-    public String errorMessage() {
-        return errorMessage;
-    }
-
-    @Override
-    public void errorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    /**
-     * 返回失败
-     *
-     * @param errorCode    错误编码
-     * @param errorMessage 错误信息
-     * @return 运行结果
-     */
-    public static ActionResult fail(String errorCode, String errorMessage) {
-        ActionResult result = new ActionResult();
-        result.errorCode = errorCode;
-        result.errorMessage = errorMessage;
-        result.success = Boolean.FALSE;
+    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, IllegalArgumentException.class,
+        MissingServletRequestParameterException.class, MethodArgumentTypeMismatchException.class,
+        BusinessException.class, MaxUploadSizeExceededException.class, ClientAbortException.class,
+        HttpRequestMethodNotSupportedException.class, HttpMediaTypeNotAcceptableException.class,
+        MultipartException.class, MissingRequestHeaderException.class, HttpMediaTypeNotSupportedException.class,
+        ConstraintViolationException.class, HttpMessageNotReadableException.class})
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public ActionResult handleBusinessException(HttpServletRequest request, Exception exception) {
+        ActionResult result = ExceptionConvertorUtils.convert(exception);
+        log.info("发生业务异常{}:{}", request.getRequestURI(), result, exception);
         return result;
     }
 
     /**
-     * 返回失败
+     * 系统异常
      *
-     * @param baseException 错误枚举
-     * @return 运行结果
+     * @param request   request
+     * @param exception exception
+     * @return return
      */
-    public static ActionResult fail(BaseExceptionEnum baseException) {
-        return fail(baseException.getCode(), baseException.getDescription());
+    @ExceptionHandler({SystemException.class})
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public ActionResult handleSystemException(HttpServletRequest request, Exception exception) {
+        ActionResult result = ExceptionConvertorUtils.convert(exception);
+        log.error("发生业务异常{}:{}", request.getRequestURI(), result, exception);
+        return result;
     }
 
     /**
-     * 返回失败
+     * 未知异常 需要人工介入查看日志
      *
-     * @param baseException 错误枚举
-     * @return 运行结果
+     * @param request   request
+     * @param exception exception
+     * @return return
      */
-    public static ActionResult fail(BaseExceptionEnum baseException, String errorMessage) {
-        return fail(baseException.getCode(), errorMessage);
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public ActionResult handledException(HttpServletRequest request, Exception exception) {
+        ActionResult result = ExceptionConvertorUtils.convert(exception);
+        log.error("发生未知异常{}:{}:{},请求参数:{}", request.getRequestURI(),
+            ExceptionConvertorUtils.buildHeaderString(request), result,
+            JSON.toJSONString(request.getParameterMap()), exception);
+        return result;
     }
 
 }
 
 ```
 
-### DataResult 用于封装单个返回值
+### ExceptionConvertorUtils 根据不同的异常来转换异常信息
+
+自己可以在 `EXCEPTION_CONVERTOR_MAP` 中加入更多的自定义异常，可以无限扩展
 
 ```java
 /**
- * data的返回对象
- *
- *@author Jiaju Zhuang
- */
-@Data
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
-public class DataResult<T> implements Serializable, Result<T> {
-    private static final long serialVersionUID = EasyToolsConstant.SERIAL_VERSION_UID;
-    /**
-     * 是否成功
-     *
-     * @mock true
-     */
-    @NotNull
-    @Builder.Default
-    private Boolean success = Boolean.TRUE;
-
-    /**
-     * 错误编码
-     *
-     * @see BaseExceptionEnum
-     */
-    private String errorCode;
-
-    /**
-     * 错误信息
-     */
-    private String errorMessage;
-
-    /**
-     * 数据信息
-     */
-    private T data;
-
-    /**
-     * traceId
-     */
-    private String traceId;
-
-    private DataResult(T data) {
-        this();
-        this.data = data;
-    }
-
-    /**
-     * 构建返回对象
-     *
-     * @param data 需要构建的对象
-     * @param <T>  需要构建的对象类型
-     * @return 返回的结果
-     */
-    public static <T> DataResult<T> of(T data) {
-        return new DataResult<>(data);
-    }
-
-    /**
-     * 构建空的返回对象
-     *
-     * @param <T> 需要构建的对象类型
-     * @return 返回的结果
-     */
-    public static <T> DataResult<T> empty() {
-        return new DataResult<>();
-    }
-
-    /**
-     * 构建异常返回
-     *
-     * @param errorCode    错误编码
-     * @param errorMessage 错误信息
-     * @param <T>          需要构建的对象类型
-     * @return 返回的结果
-     */
-    public static <T> DataResult<T> error(String errorCode, String errorMessage) {
-        DataResult<T> result = new DataResult<>();
-        result.errorCode = errorCode;
-        result.errorMessage = errorMessage;
-        result.success = false;
-        return result;
-    }
-
-    /**
-     * 构建异常返回
-     *
-     * @param baseException 错误枚举
-     * @param <T>       需要构建的对象类型
-     * @return 返回的结果
-     */
-    public static <T> DataResult<T> error(BaseExceptionEnum baseException) {
-        return error(baseException.getCode(), baseException.getDescription());
-    }
-
-    /**
-     * 判断是否存在数据
-     *
-     * @param dataResult
-     * @return 是否存在数据
-     */
-    public static boolean hasData(DataResult<?> dataResult) {
-        return dataResult != null && dataResult.getSuccess() && dataResult.getData() != null;
-    }
-
-    /**
-     * 将当前的类型转换成另外一个类型
-     *
-     * @param mapper 转换的方法
-     * @param <R>    返回的类型
-     * @return 返回的结果
-     */
-    public <R> DataResult<R> map(Function<T, R> mapper) {
-        R returnData = hasData(this) ? mapper.apply(getData()) : null;
-        DataResult<R> dataResult = new DataResult<>();
-        dataResult.setSuccess(getSuccess());
-        dataResult.setErrorCode(getErrorCode());
-        dataResult.setErrorMessage(getErrorMessage());
-        dataResult.setData(returnData);
-        dataResult.setTraceId(getTraceId());
-        return dataResult;
-    }
-
-    @Override
-    public boolean success() {
-        return success;
-    }
-
-    @Override
-    public void success(boolean success) {
-        this.success = success;
-    }
-
-    @Override
-    public String errorCode() {
-        return errorCode;
-    }
-
-    @Override
-    public void errorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    @Override
-    public String errorMessage() {
-        return errorMessage;
-    }
-
-    @Override
-    public void errorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-}
-
-
-```
-
-### ListResult 用于返回一个列表
-
-```java
-/**
- * 列表的返回对象
+ * 转换异常工具类
  *
  * @author Jiaju Zhuang
  */
-@Data
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ListResult<T> implements Serializable, Result<T> {
-    private static final long serialVersionUID = EasyToolsConstant.SERIAL_VERSION_UID;
+public class ExceptionConvertorUtils {
+
     /**
-     * 是否成功
+     * 所有的异常处理转换器
+     */
+    public static final Map<Class<?>, ExceptionConvertor> EXCEPTION_CONVERTOR_MAP = Maps.newHashMap();
+
+    static {
+        EXCEPTION_CONVERTOR_MAP.put(MethodArgumentNotValidException.class,
+            new MethodArgumentNotValidExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(BindException.class, new BindExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(BusinessException.class, new BusinessExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(MissingServletRequestParameterException.class, new ParamExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(IllegalArgumentException.class, new ParamExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(MethodArgumentTypeMismatchException.class,
+            new MethodArgumentTypeMismatchExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(MaxUploadSizeExceededException.class,
+            new MaxUploadSizeExceededExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(HttpRequestMethodNotSupportedException.class, new BusinessExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(ConstraintViolationException.class, new ConstraintViolationExceptionConvertor());
+        EXCEPTION_CONVERTOR_MAP.put(HttpMessageNotReadableException.class,
+            new ParamExceptionConvertor());
+    }
+
+    /**
+     * 默认转换器
+     */
+    public static ExceptionConvertor DEFAULT_EXCEPTION_CONVERTOR = new DefaultExceptionConvertor();
+
+    /**
+     * 提取ConstraintViolationException中的错误消息
      *
-     * @mock true
+     * @param e
+     * @return
      */
-    @NotNull
-    @Builder.Default
-    private Boolean success = Boolean.TRUE;
-
-    /**
-     * 错误编码
-     *
-     * @see BaseExceptionEnum
-     */
-    private String errorCode;
-    /**
-     * 异常信息
-     */
-    private String errorMessage;
-    /**
-     * 数据信息
-     */
-    private List<T> data;
-    /**
-     * traceId
-     */
-    private String traceId;
-
-    private ListResult(List<T> data) {
-        this();
-        this.data = data;
-    }
-
-    /**
-     * 构建列表返回对象
-     *
-     * @param data 需要构建的对象
-     * @param <T>  需要构建的对象类型
-     * @return 返回的列表
-     */
-    public static <T> ListResult<T> of(List<T> data) {
-        return new ListResult<>(data);
-    }
-
-    /**
-     * 构建空的列表返回对象
-     *
-     * @param <T> 需要构建的对象类型
-     * @return 返回的列表
-     */
-    public static <T> ListResult<T> empty() {
-        return of(Collections.emptyList());
-    }
-
-    /**
-     * 构建异常返回列表
-     *
-     * @param errorCode    错误编码
-     * @param errorMessage 错误信息
-     * @param <T>          需要构建的对象类型
-     * @return 返回的列表
-     */
-    public static <T> ListResult<T> error(String errorCode, String errorMessage) {
-        ListResult<T> result = new ListResult<>();
-        result.errorCode = errorCode;
-        result.errorMessage = errorMessage;
-        result.success = Boolean.TRUE;
-        return result;
-    }
-
-    /**
-     * 构建异常返回列表
-     *
-     * @param baseException 错误枚举
-     * @param <T>       需要构建的对象类型
-     * @return 返回的列表
-     */
-    public static <T> ListResult<T> error(BaseExceptionEnum baseException) {
-        return error(baseException.getCode(), baseException.getDescription());
-    }
-
-    /**
-     * 判断是否存在数据
-     *
-     * @param listResult
-     * @return 是否存在数据
-     */
-    public static boolean hasData(ListResult<?> listResult) {
-        return listResult != null && listResult.getSuccess() && listResult.getData() != null && !listResult.getData()
-            .isEmpty();
-    }
-
-    /**
-     * 将当前的类型转换成另外一个类型
-     *
-     * @param mapper 转换的方法
-     * @param <R>    返回的类型
-     * @return 分页返回对象
-     */
-    public <R> ListResult<R> map(Function<T, R> mapper) {
-        List<R> returnData = hasData(this) ? getData().stream().map(mapper).collect(Collectors.toList())
-            : Collections.emptyList();
-        ListResult<R> listResult = new ListResult<>();
-        listResult.setSuccess(getSuccess());
-        listResult.setErrorCode(getErrorCode());
-        listResult.setErrorMessage(getErrorMessage());
-        listResult.setData(returnData);
-        listResult.setTraceId(getTraceId());
-        return listResult;
-    }
-
-    @Override
-    public boolean success() {
-        return success;
-    }
-
-    @Override
-    public void success(boolean success) {
-        this.success = success;
-    }
-
-    @Override
-    public String errorCode() {
-        return errorCode;
-    }
-
-    @Override
-    public void errorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    @Override
-    public String errorMessage() {
-        return errorMessage;
-    }
-
-    @Override
-    public void errorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-}
-
-
-```
-
-### PageResult 用于封装分页返回
-
-```java
-/**
- * 分页的返回对象
- *
- * @author JiaJu Zhuang
- */
-@Data
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
-public class PageResult<T> implements Serializable, Result<List<T>> {
-    private static final long serialVersionUID = EasyToolsConstant.SERIAL_VERSION_UID;
-    /**
-     * 是否成功
-     *
-     * @mock true
-     */
-    @NotNull
-    @Builder.Default
-    private Boolean success = Boolean.TRUE;
-    /**
-     * 异常编码
-     */
-    private String errorCode;
-    /**
-     * 异常信息
-     */
-    private String errorMessage;
-    /**
-     * 数据信息
-     */
-    @Builder.Default
-    private Page<T> data = new Page<>();
-    /**
-     * traceId
-     */
-    private String traceId;
-
-    private PageResult(List<T> data, Long total, Long pageNum, Long pageSize) {
-        this.success = Boolean.TRUE;
-        this.data = new Page<>(data, total, pageNum, pageSize);
-    }
-
-    private PageResult(List<T> data, Long total, Integer pageNum, Integer pageSize) {
-        this.success = Boolean.TRUE;
-        this.data = new Page<>(data, total, pageNum, pageSize);
-    }
-
-    /**
-     * 构建分页返回对象
-     *
-     * @param data     返回的对象
-     * @param total    总的条数
-     * @param pageNum  页码
-     * @param pageSize 分页大小
-     * @param <T>      返回的对象类型
-     * @return 分页返回对象
-     */
-    public static <T> PageResult<T> of(List<T> data, Long total, Long pageNum, Long pageSize) {
-        return new PageResult<>(data, total, pageNum, pageSize);
-    }
-
-    /**
-     * 构建分页返回对象
-     *
-     * @param data     返回的对象
-     * @param total    总的条数
-     * @param pageNum  页码
-     * @param pageSize 分页大小
-     * @param <T>      返回的对象类型
-     * @return 分页返回对象
-     */
-    public static <T> PageResult<T> of(List<T> data, Long total, Integer pageNum, Integer pageSize) {
-        return new PageResult<>(data, total, pageNum, pageSize);
-    }
-
-    /**
-     * 构建分页返回对象
-     *
-     * @param data  返回的对象
-     * @param total 总的条数
-     * @param param 分页参数
-     * @param <T>   返回的对象类型
-     * @return 分页返回对象
-     */
-    public static <T> PageResult<T> of(List<T> data, Long total, PageQueryParam param) {
-        return new PageResult<>(data, total, param.getPageNum(), param.getPageSize());
-    }
-
-    /**
-     * 构建空的返回对象
-     *
-     * @param pageNum  页码
-     * @param pageSize 分页大小
-     * @param <T>      返回的对象类型
-     * @return 分页返回对象
-     */
-    public static <T> PageResult<T> empty(Long pageNum, Long pageSize) {
-        return of(Collections.emptyList(), 0L, pageNum, pageSize);
-    }
-
-    /**
-     * 构建空的返回对象
-     *
-     * @param pageNum  页码
-     * @param pageSize 分页大小
-     * @param <T>      返回的对象类型
-     * @return 分页返回对象
-     */
-    public static <T> PageResult<T> empty(Integer pageNum, Integer pageSize) {
-        return of(Collections.emptyList(), 0L, pageNum, pageSize);
-    }
-
-    /**
-     * 判断是否还有下一页
-     * 根据分页大小来计算 防止total为空
-     *
-     * @return 是否还有下一页
-     * @deprecated 使用 {@link #getHasNextPage()} ()}
-     */
-    @Deprecated
-    public boolean hasNextPage() {
-        return getHasNextPage();
-    }
-
-    public Boolean getHasNextPage() {
-        if (data == null) {
-            return Boolean.FALSE;
+    public static String buildMessage(ConstraintViolationException e) {
+        if (e == null || CollectionUtils.isEmpty(e.getConstraintViolations())) {
+            return null;
         }
-        return data.getHasNextPage();
+        int index = 1;
+        StringBuilder msg = new StringBuilder();
+        msg.append("请检查以下信息：");
+        for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+            msg.append(index++);
+            // 得到错误消息
+            msg.append(SymbolConstant.DOT);
+            msg.append(" 字段(");
+            msg.append(constraintViolation.getPropertyPath());
+            msg.append(")传入的值为：\"");
+            msg.append(constraintViolation.getInvalidValue());
+            msg.append("\"，校验失败,原因是：");
+            msg.append(constraintViolation.getMessage());
+            msg.append(SymbolConstant.SEMICOLON);
+        }
+        return msg.toString();
     }
 
     /**
-     * 返回查询异常信息
+     * 提取BindingResult中的错误消息
      *
-     * @param errorCode    错误编码
-     * @param errorMessage 错误信息
-     * @param <T>          返回的对象
-     * @return 分页返回对象
+     * @param result
+     * @return
      */
-    public static <T> PageResult<T> error(String errorCode, String errorMessage) {
-        PageResult<T> result = new PageResult<>();
-        result.errorCode = errorCode;
-        result.errorMessage = errorMessage;
-        result.success = Boolean.FALSE;
-        return result;
+    public static String buildMessage(BindingResult result) {
+        List<ObjectError> errors = result.getAllErrors();
+        if (CollectionUtils.isEmpty(errors)) {
+            return null;
+        }
+
+        int index = 1;
+        StringBuilder msg = new StringBuilder();
+        msg.append("请检查以下信息：");
+        for (ObjectError e : errors) {
+            msg.append(index++);
+            // 得到错误消息
+            msg.append(SymbolConstant.DOT);
+            msg.append(" ");
+            msg.append("字段(");
+            msg.append(e.getObjectName());
+            if (e instanceof FieldError) {
+                FieldError fieldError = (FieldError)e;
+                msg.append(SymbolConstant.DOT);
+                msg.append(fieldError.getField());
+            }
+            msg.append(")");
+            if (e instanceof FieldError) {
+                FieldError fieldError = (FieldError)e;
+                msg.append("传入的值为：\"");
+                msg.append(fieldError.getRejectedValue());
+                msg.append("\",");
+            }
+            msg.append("校验失败,原因是：");
+            msg.append(e.getDefaultMessage());
+            msg.append(SymbolConstant.SEMICOLON);
+        }
+        return msg.toString();
     }
 
     /**
-     * 返回查询异常信息
+     * 拼接头的日志信息
      *
-     * @param baseException 错误枚举
-     * @param <T>       返回的对象
-     * @return 分页返回对象
+     * @param request
+     * @return
      */
-    public static <T> PageResult<T> error(BaseExceptionEnum baseException) {
-        return error(baseException.getCode(), baseException.getDescription());
+    public static String buildHeaderString(HttpServletRequest request) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headName = headerNames.nextElement();
+            stringBuilder.append(headName);
+            stringBuilder.append(SymbolConstant.COLON);
+            stringBuilder.append(request.getHeader(headName));
+            stringBuilder.append(SymbolConstant.COMMA);
+        }
+        return stringBuilder.toString();
     }
 
     /**
-     * 判断是否存在数据
+     * 转换结果
      *
-     * @param pageResult
-     * @return 是否存在数据
+     * @param exception
+     * @return
      */
-    public static boolean hasData(PageResult<?> pageResult) {
-        return pageResult != null && pageResult.getSuccess() && pageResult.getData() != null
-            && pageResult.getData().getData() != null && !pageResult.getData().getData().isEmpty();
-    }
-
-    /**
-     * 将当前的类型转换成另外一个类型
-     *
-     * @param mapper 转换的方法
-     * @param <R>    返回的类型
-     * @return 分页返回对象
-     */
-    public <R> PageResult<R> map(Function<T, R> mapper) {
-        List<R> returnData = hasData(this) ? getData().getData().stream().map(mapper).collect(Collectors.toList())
-            : Collections.emptyList();
-        PageResult<R> pageResult = new PageResult<>();
-        pageResult.setSuccess(getSuccess());
-        pageResult.setErrorCode(getErrorCode());
-        pageResult.setErrorMessage(getErrorMessage());
-        pageResult.setTraceId(getTraceId());
-        // 重新设置一个分页信息
-        Page<R> page = new Page<>();
-        pageResult.setData(page);
-        page.setData(returnData);
-        page.setPageNum(data.getPageNum());
-        page.setPageSize(data.getPageSize());
-        page.setTotal(data.getTotal());
-        return pageResult;
-    }
-
-    @Override
-    public boolean success() {
-        return success;
-    }
-
-    @Override
-    public void success(boolean success) {
-        this.success = success;
-    }
-
-    @Override
-    public String errorCode() {
-        return errorCode;
-    }
-
-    @Override
-    public void errorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    @Override
-    public String errorMessage() {
-        return errorMessage;
-    }
-
-    @Override
-    public void errorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public static ActionResult convert(Throwable exception) {
+        ExceptionConvertor exceptionConvertor = EXCEPTION_CONVERTOR_MAP.get(exception.getClass());
+        if (exceptionConvertor == null) {
+            exceptionConvertor = DEFAULT_EXCEPTION_CONVERTOR;
+        }
+        return exceptionConvertor.convert(exception);
     }
 
 }
 
+```
+
+### 拿一个 ParamExceptionConvertor 参数异常举例
+
+```java
+
+/**
+ * 参数异常 目前包括
+ * ConstraintViolationException
+ * MissingServletRequestParameterException
+ * IllegalArgumentException
+ * HttpMessageNotReadableException
+ *
+ * @author Jiaju Zhuang
+ */
+public class ParamExceptionConvertor implements ExceptionConvertor<Throwable> {
+
+    @Override
+    public ActionResult convert(Throwable exception) {
+        return ActionResult.fail(CommonExceptionEnum.INVALID_PARAMETER, exception.getMessage());
+    }
+}
+
 
 ```
+
 
 ### 总结
 
-今天分享了4个返回的封装类，分别是ActionResult、DataResult、ListResult、PageResult，这4个类可以满足大部分的返回值封装，如果有特殊的返回值，可以根据这4个类进行扩展。相信一定会对你的工作有帮助，具体源码可以直接在最开始的案例里面复制。
+这样子我们就完成了全局异常处理，再也不用担心整个项目的 `try-catch` 代码了。
 
 ## 写在最后
 
-你是否在为找不到完整的项目搭建的最佳实践而烦恼呢？这里给你推荐一个非常完整的开源模板：[https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools)
+给大家推荐一个非常完整的Java项目搭建的最佳实践,也是本文的源码出处，由大厂程序员&EasyExcel作者维护，地址：[https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools)
