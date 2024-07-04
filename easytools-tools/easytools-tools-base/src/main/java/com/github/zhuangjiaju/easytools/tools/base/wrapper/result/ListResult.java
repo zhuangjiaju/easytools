@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import com.github.zhuangjiaju.easytools.tools.base.constant.EasyToolsConstant;
 import com.github.zhuangjiaju.easytools.tools.base.enums.BaseExceptionEnum;

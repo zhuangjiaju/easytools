@@ -2,17 +2,17 @@ package com.github.zhuangjiaju.easytools.web.web.contoller.result.request;
 
 import com.github.zhuangjiaju.easytools.tools.base.wrapper.request.PageQueryRequest;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 分页查询
  *
- * @author 是仪
+ * @author Jiaju Zhuang
  */
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResultPageQueryRequest extends PageQueryRequest {

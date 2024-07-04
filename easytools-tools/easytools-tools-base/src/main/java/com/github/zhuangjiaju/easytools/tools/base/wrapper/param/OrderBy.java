@@ -3,11 +3,10 @@ package com.github.zhuangjiaju.easytools.tools.base.wrapper.param;
 import java.io.Serializable;
 
 import com.github.zhuangjiaju.easytools.tools.base.enums.OrderByDirectionEnum;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 排序的对象
@@ -15,7 +14,7 @@ import lombok.NoArgsConstructor;
  * @author Jiaju Zhuang
  */
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderBy implements Serializable {

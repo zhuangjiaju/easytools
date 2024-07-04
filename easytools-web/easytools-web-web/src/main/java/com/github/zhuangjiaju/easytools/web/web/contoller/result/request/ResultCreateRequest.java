@@ -1,17 +1,17 @@
 package com.github.zhuangjiaju.easytools.web.web.contoller.result.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 创建对象
  *
- * @author 是仪
+ * @author Jiaju Zhuang
  */
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResultCreateRequest {

@@ -14,6 +14,7 @@
 
     <modules>
         <module>easytools-web-web</module>
+        <module>easytools-web-common</module>
     </modules>
 
 </project>

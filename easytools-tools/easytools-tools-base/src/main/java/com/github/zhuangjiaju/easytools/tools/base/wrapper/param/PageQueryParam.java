@@ -1,18 +1,17 @@
 package com.github.zhuangjiaju.easytools.tools.base.wrapper.param;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.zhuangjiaju.easytools.tools.base.constant.EasyToolsConstant;
 import com.github.zhuangjiaju.easytools.tools.base.enums.OrderByDirectionEnum;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 分页查询的参数

@@ -9,7 +9,7 @@ import lombok.NonNull;
  * 单表普通查询
  * 最多返回500条
  *
- * @author 是仪
+ * @author Jiaju Zhuang
  */
 @Data
 @NoArgsConstructor

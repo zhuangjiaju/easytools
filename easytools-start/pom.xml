@@ -24,11 +24,19 @@
         </dependency>
         <dependency>
             <groupId>com.github.zhuangjiaju</groupId>
+            <artifactId>easytools-web-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.zhuangjiaju</groupId>
             <artifactId>easytools-tools-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.zhuangjiaju</groupId>
             <artifactId>easytools-domain-course-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.zhuangjiaju</groupId>
+            <artifactId>easytools-domain-demo-core</artifactId>
         </dependency>
 
         <!-- 日志用logback -->

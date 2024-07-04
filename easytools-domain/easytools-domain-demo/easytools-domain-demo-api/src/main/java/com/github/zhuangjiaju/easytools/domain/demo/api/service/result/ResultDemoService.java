@@ -2,9 +2,9 @@ package com.github.zhuangjiaju.easytools.domain.demo.api.service.result;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.annotation.Nullable;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import com.github.zhuangjiaju.easytools.domain.demo.api.service.result.dto.ResultDTO;
 import com.github.zhuangjiaju.easytools.domain.demo.api.service.result.param.ResultCreateParam;

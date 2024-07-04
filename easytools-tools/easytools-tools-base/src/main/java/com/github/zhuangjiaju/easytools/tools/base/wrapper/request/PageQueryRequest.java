@@ -1,13 +1,14 @@
 package com.github.zhuangjiaju.easytools.tools.base.wrapper.request;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 import com.github.zhuangjiaju.easytools.tools.base.constant.EasyToolsConstant;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * 分页查询的参数
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @SuperBuilder
 @AllArgsConstructor
 public class PageQueryRequest implements Serializable {
+    @Serial
     private static final long serialVersionUID = EasyToolsConstant.SERIAL_VERSION_UID;
     /**
      * 页码

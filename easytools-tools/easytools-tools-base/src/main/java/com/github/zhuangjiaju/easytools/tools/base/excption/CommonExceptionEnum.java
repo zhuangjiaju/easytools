@@ -35,6 +35,11 @@ public enum CommonExceptionEnum implements BaseExceptionEnum {
      */
     PERMISSION_DENIED("权限不够"),
 
+    /**
+     * 上传的文件过大
+     */
+    MAX_UPLOAD_SIZE_EXCEEDED("上传的文件过大"),
+
     ;
 
     CommonExceptionEnum(String description) {

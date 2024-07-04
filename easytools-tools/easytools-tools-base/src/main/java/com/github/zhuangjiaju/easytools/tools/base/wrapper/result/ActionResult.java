@@ -2,12 +2,10 @@ package com.github.zhuangjiaju.easytools.tools.base.wrapper.result;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
-
 import com.github.zhuangjiaju.easytools.tools.base.constant.EasyToolsConstant;
 import com.github.zhuangjiaju.easytools.tools.base.enums.BaseExceptionEnum;
 import com.github.zhuangjiaju.easytools.tools.base.wrapper.Result;
-
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

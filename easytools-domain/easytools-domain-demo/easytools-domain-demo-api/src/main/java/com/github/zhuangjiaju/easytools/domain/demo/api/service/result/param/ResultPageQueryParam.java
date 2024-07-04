@@ -8,7 +8,7 @@ import lombok.NonNull;
 /**
  * 单表分页查询
  *
- * @author 是仪
+ * @author Jiaju Zhuang
  */
 @Data
 @NoArgsConstructor

@@ -1,7 +1,7 @@
 package com.github.zhuangjiaju.easytools.web.web.contoller.result;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import com.github.zhuangjiaju.easytools.domain.demo.api.service.result.ResultDemoService;
 import com.github.zhuangjiaju.easytools.tools.base.wrapper.result.DataResult;
@@ -15,16 +15,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 结果模板
+ * demo/结果模板
  *
  * @author Jiaju Zhuang
  */
 @Slf4j
-@RestController("/api/web/result")
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/web/result")
 public class ResultWebController {
     private final ResultDemoService resultDemoService;
     private final ResultWebConverter resultWebConverter;

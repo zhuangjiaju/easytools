@@ -2,7 +2,7 @@ package com.github.zhuangjiaju.easytools.domain.demo.core.service.result;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 import com.github.zhuangjiaju.easytools.domain.demo.api.service.result.ResultDemoService;
 import com.github.zhuangjiaju.easytools.domain.demo.api.service.result.dto.ResultDTO;
