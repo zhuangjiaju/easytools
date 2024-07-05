@@ -65,7 +65,7 @@
 
 案例地址： [https://github.com/zhuangjiaju/easytools/blob/main/pom.xml](https://github.com/zhuangjiaju/easytools/blob/main/pom.xml)
 
-### 业务代码只要写上注解即可
+### 配置信息
 
 在父`pom.xml` 加入如下配置
 
