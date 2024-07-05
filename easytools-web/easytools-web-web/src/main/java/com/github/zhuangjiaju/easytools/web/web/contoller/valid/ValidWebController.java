@@ -32,6 +32,7 @@ public class ValidWebController {
 
     /**
      * 校验数据
+     * 加了 @Valid 就可以自动校验参数了
      *
      * @param request 参数
      * @return id

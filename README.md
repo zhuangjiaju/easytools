@@ -1,20 +1,12 @@
-# easytools
+# EasyTools
 
-java web工程的最佳实践
+java卓越工程实战, 让你的代码变得更加优雅。
 
-# 为什么要创建这个项目
+# 这个项目解决了什么问题
 
-很多大公司面试动不动就问领域驱动设计，但是实际上在开发项目的时候连控制层、服务层、持久化层的职责都没搞明白。 这个项目核心就是想把这三层彻底的写明白了，写一个java web工程的最佳实践。
-
-# 什么情况下要使用这个项目
-
-* 工程分层不明确
-* 每个人代码风格不统一 经常扯皮
-
-# 使用本项目的好处
-
-* 每个人写出一样的代码 非常容易看懂别人的代码
-* 不用看实现就敢用别人的方法
+* 带领大家看到大厂的一些代码规范
+* 大家代码规范统一，提高代码的可读性
+* 提供各种实战案例，提升你的编码能力
 
 # 帮忙点个⭐Star
 
@@ -22,6 +14,10 @@ java web工程的最佳实践
 的右上角点个⭐Star，您的支持是使EasyTools变得更好最大的动力。
 
 # 目录
+
 ## 项目规范
+
 * [使用统一 `Reuslt` 对象去封装返回值](doc/result-package.md)
 * [告别代码中遍地的 try-catch，使用 spring 全局统一异常处理](doc/controller-exception-handler.md)
+* [基于hibernate-validator,java前端入参校验最佳实践](doc/hibernate-validator.md)
+* [java 开源项目是如何将多个 module 版本统一配置的？](doc/flatten-maven-plugin.md)
