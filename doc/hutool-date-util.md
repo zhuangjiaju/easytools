@@ -28,7 +28,7 @@ Hutool 是一个小而全的Java工具类库，通过静态方法封装，降低
 
 #### [#](https://doc.hutool.cn/pages/DateUtil/#date%E3%80%81long%E3%80%81calendar%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2)Date、long、Calendar之间的相互转换
 
-```
+```java
 //当前时间
 Date date = DateUtil.date();
 //当前时间
@@ -66,21 +66,21 @@ DateUtil.parse方法会自动识别一些常用格式，包括：
 - yyyy-MM-dd'T'HH:mm:ssZ
 - yyyy-MM-dd'T'HH:mm:ss.SSSZ
 
-```
+```java
 String dateStr = "2017-03-01";
 Date date = DateUtil.parse(dateStr);
 ```
 
 我们也可以使用自定义日期格式转化：
 
-```
+```java
 String dateStr = "2017-03-01";
 Date date = DateUtil.parse(dateStr, "yyyy-MM-dd");
 ```
 
 ### [#](https://doc.hutool.cn/pages/DateUtil/#%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%A5%E6%9C%9F%E8%BE%93%E5%87%BA)格式化日期输出
 
-```
+```java
 String dateStr = "2017-03-01";
 Date date = DateUtil.parse(dateStr);
 
@@ -99,7 +99,7 @@ String formatTime = DateUtil.formatTime(date);
 
 ### [#](https://doc.hutool.cn/pages/DateUtil/#%E8%8E%B7%E5%8F%96date%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9F%90%E4%B8%AA%E9%83%A8%E5%88%86)获取Date对象的某个部分
 
-```
+```java
 Date date = DateUtil.date();
 //获得年的部分
 DateUtil.year(date);
@@ -114,7 +114,7 @@ DateUtil.monthEnum(date);
 
 有的时候我们需要获得每天的开始时间、结束时间，每月的开始和结束时间等等，DateUtil也提供了相关方法：
 
-```
+```java
 String dateStr = "2017-03-01 22:33:23";
 Date date = DateUtil.parse(dateStr);
 
@@ -129,7 +129,7 @@ Date endOfDay = DateUtil.endOfDay(date);
 
 日期或时间的偏移指针对某个日期增加或减少分、小时、天等等，达到日期变更的目的。Hutool也针对其做了大量封装
 
-```
+```java
 String dateStr = "2017-03-01 22:33:23";
 Date date = DateUtil.parse(dateStr);
 
@@ -145,7 +145,7 @@ DateTime newDate3 = DateUtil.offsetHour(date, -3);
 
 针对当前时间，提供了简化的偏移方法（例如昨天、上周、上个月等）：
 
-```
+```java
 //昨天
 DateUtil.yesterday()
 //明天
@@ -164,7 +164,7 @@ DateUtil.nextMonth()
 
 有时候我们需要计算两个日期之间的时间差（相差天数、相差小时数等等），Hutool将此类方法封装为between方法：
 
-```
+```java
 String dateStr1 = "2017-03-01 22:33:23";
 Date date1 = DateUtil.parse(dateStr1);
 
@@ -179,7 +179,7 @@ long betweenDay = DateUtil.between(date1, date2, DateUnit.DAY);
 
 有时候我们希望看到易读的时间差，比如XX天XX小时XX分XX秒，此时使用DateUtil.formatBetween方法：
 
-```
+```java
 //Level.MINUTE表示精确到分
 String formatBetween = DateUtil.formatBetween(between, Level.MINUTE);
 //输出：31天1小时
@@ -188,7 +188,7 @@ Console.log(formatBetween);
 
 ### [#](https://doc.hutool.cn/pages/DateUtil/#%E6%98%9F%E5%BA%A7%E5%92%8C%E5%B1%9E%E7%9B%B8)星座和属相
 
-```
+```java
 // "摩羯座"
 String zodiac = DateUtil.getZodiac(Month.JANUARY.getValue(), 19);
 
@@ -198,7 +198,7 @@ String chineseZodiac = DateUtil.getChineseZodiac(1994);
 
 ### [#](https://doc.hutool.cn/pages/DateUtil/#%E6%97%A5%E6%9C%9F%E8%8C%83%E5%9B%B4)日期范围
 
-```
+```java
 // 创建日期范围生成器
 DateTime start = DateUtil.parse("2021-01-31");
 DateTime end = DateUtil.parse("2021-03-31");
@@ -219,7 +219,7 @@ List<DateTime> rangeToList = DateUtil.rangeToList(DateUtil.parse("2017-01-01"), 
 
 ### [#](https://doc.hutool.cn/pages/DateUtil/#%E5%85%B6%E5%AE%83)其它
 
-```
+```java
 //年龄
 DateUtil.ageOfNow("1990-01-30");
 
