@@ -21,3 +21,11 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [告别代码中遍地的 try-catch，使用 spring 全局统一异常处理](doc/controller-exception-handler.md)
 * [基于hibernate-validator,java前端入参校验最佳实践](doc/hibernate-validator.md)
 * [java 开源项目是如何将多个 module 版本统一配置的？](doc/flatten-maven-plugin.md)
+
+## 源码解析
+
+* [大厂面试必备系列：一文彻底搞懂 Cglib 代理](doc/cglib.md)
+
+## 工具推荐
+
+* [还在代码中写DateUtil?是时候说再见啦](doc/hutool-date-util.md)
