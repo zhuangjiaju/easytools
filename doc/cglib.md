@@ -47,7 +47,7 @@ public void beanMap() throws Exception {
 
 ```
 
-是不是好好奇？Cglib 的 put 方法这么神奇，他就是做了啥？
+是不是好好奇？BeanMap 的 put 方法这么神奇，他就是做了啥？
 
 ### 查看生成后的源码
 
