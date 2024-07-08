@@ -10,731 +10,253 @@
 
 ### 直接上案例
 
-案例地址： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/exception/ExceptionWebController.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-web/easytools-web-web/src/main/java/com/github/zhuangjiaju/easytools/web/web/contoller/exception/ExceptionWebController.java)
+案例地址： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-test/src/test/java/com/github/zhuangjiaju/easytools/test/demo/cglib/CglibTest.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-test/src/test/java/com/github/zhuangjiaju/easytools/test/demo/cglib/CglibTest.java)
 
-这里需要配合 "统一 `Reuslt` 对象去封装返回值"
-一起使用,可以打开 [https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools) 找到案例
+### 最简单的cglib案例
 
-### 业务代码中直接抛出异常即可
-
-```java
- /**
- * demo/异常模板
- *
- * @author Jiaju Zhuang
- */
-@Slf4j
-@RestController
-@RequiredArgsConstructor
-@RequestMapping("/api/web/result")
-public class ExceptionWebController {
-
-    /**
-     * 测试业务异常
-     *
-     * @return
-     */
-    @GetMapping("business-exception")
-    public ActionResult businessException() {
-        // 直接抛出异常，不用返回ActionResult
-        throw BusinessException.of("业务异常");
-    }
-
-    /**
-     * 测试系统异常
-     *
-     * @return
-     */
-    @GetMapping("system-exception")
-    public ActionResult systemException() {
-        // 直接抛出异常，不用返回ActionResult
-        throw SystemException.of("系统异常");
-    }
-
-}
-
-```
-
-返回的结果：
-
-```json
-{
-  "success": false,
-  "errorCode": "BUSINESS_ERROR",
-  "errorMessage": "业务异常",
-  "traceId": null
-}
-
-{
-  "success": false,
-  "errorCode": "SYSTEM_ERROR",
-  "errorMessage": "系统开小差啦，请尝试刷新页面或者联系管理员",
-  "traceId": null
-}
-```
-
-输出的异常日志：
-
-```java
-2024-07-04T20:54:40.903+08:00INFO 17360---[nio-8080-exec-1]c.g.z.e.w.c.h.ControllerExceptionHandler :发生业务异常/api/web/result/business-exception:
-
-ActionResult(success=false, errorCode=BUSINESS_ERROR, errorMessage=业务异常, traceId=null)
-
-com.github.zhuangjiaju.easytools.tools.base.excption.BusinessException:业务异常
-at com.github.zhuangjiaju.easytools.tools.base.excption.BusinessException.
-
-of(BusinessException.java:47)
-
-at com.github.zhuangjiaju.easytools.web.web.contoller.exception.ExceptionWebController.
-
-businessException(ExceptionWebController.java:30)
-
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.
-
-invoke(DirectMethodHandleAccessor.java:103)
-
-at java.base/java.lang.reflect.Method.
-
-invoke(Method.java:580)
-
-at org.springframework.web.method.support.InvocableHandlerMethod.
-
-doInvoke(InvocableHandlerMethod.java:255)
-
-at org.springframework.web.method.support.InvocableHandlerMethod.
-
-invokeForRequest(InvocableHandlerMethod.java:188)
-
-at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.
-
-invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-
-at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.
-
-invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
-
-at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.
-
-handleInternal(RequestMappingHandlerAdapter.java:831)
-
-at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.
-
-handle(AbstractHandlerMethodAdapter.java:87)
-
-at org.springframework.web.servlet.DispatcherServlet.
-
-doDispatch(DispatcherServlet.java:1089)
-
-at org.springframework.web.servlet.DispatcherServlet.
-
-doService(DispatcherServlet.java:979)
-
-at org.springframework.web.servlet.FrameworkServlet.
-
-processRequest(FrameworkServlet.java:1014)
-
-at org.springframework.web.servlet.FrameworkServlet.
-
-doGet(FrameworkServlet.java:903)
-
-at jakarta.servlet.http.HttpServlet.
-
-service(HttpServlet.java:564)
-
-at org.springframework.web.servlet.FrameworkServlet.
-
-service(FrameworkServlet.java:885)
-
-at jakarta.servlet.http.HttpServlet.
-
-service(HttpServlet.java:658)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:195)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.apache.tomcat.websocket.server.WsFilter.
-
-doFilter(WsFilter.java:51)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.springframework.web.filter.RequestContextFilter.
-
-doFilterInternal(RequestContextFilter.java:100)
-
-at org.springframework.web.filter.OncePerRequestFilter.
-
-doFilter(OncePerRequestFilter.java:116)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.springframework.web.filter.FormContentFilter.
-
-doFilterInternal(FormContentFilter.java:93)
-
-at org.springframework.web.filter.OncePerRequestFilter.
-
-doFilter(OncePerRequestFilter.java:116)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.springframework.web.filter.CharacterEncodingFilter.
-
-doFilterInternal(CharacterEncodingFilter.java:201)
-
-at org.springframework.web.filter.OncePerRequestFilter.
-
-doFilter(OncePerRequestFilter.java:116)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.apache.catalina.core.StandardWrapperValve.
-
-invoke(StandardWrapperValve.java:167)
-
-at org.apache.catalina.core.StandardContextValve.
-
-invoke(StandardContextValve.java:90)
-
-at org.apache.catalina.authenticator.AuthenticatorBase.
-
-invoke(AuthenticatorBase.java:482)
-
-at org.apache.catalina.core.StandardHostValve.
-
-invoke(StandardHostValve.java:115)
-
-at org.apache.catalina.valves.ErrorReportValve.
-
-invoke(ErrorReportValve.java:93)
-
-at org.apache.catalina.core.StandardEngineValve.
-
-invoke(StandardEngineValve.java:74)
-
-at org.apache.catalina.connector.CoyoteAdapter.
-
-service(CoyoteAdapter.java:344)
-
-at org.apache.coyote.http11.Http11Processor.
-
-service(Http11Processor.java:389)
-
-at org.apache.coyote.AbstractProcessorLight.
-
-process(AbstractProcessorLight.java:63)
-
-at org.apache.coyote.AbstractProtocol$ConnectionHandler.
-
-process(AbstractProtocol.java:904)
-
-at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.
-
-doRun(NioEndpoint.java:1741)
-
-at org.apache.tomcat.util.net.SocketProcessorBase.
-
-run(SocketProcessorBase.java:52)
-
-at org.apache.tomcat.util.threads.ThreadPoolExecutor.
-
-runWorker(ThreadPoolExecutor.java:1190)
-
-at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.
-
-run(ThreadPoolExecutor.java:659)
-
-at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.
-
-run(TaskThread.java:63)
-
-at java.base/java.lang.Thread.
-
-run(Thread.java:1583)
-
-2024-07-04T20:54:47.361+08:00ERROR 17360---[nio-8080-exec-2]c.g.z.e.w.c.h.ControllerExceptionHandler :发生业务异常/api/web/result/system-exception:
-
-ActionResult(success=false, errorCode=SYSTEM_ERROR, errorMessage=系统开小差啦，请尝试刷新页面或者联系管理员,
-    traceId=null)
-
-com.github.zhuangjiaju.easytools.tools.base.excption.SystemException:系统异常
-at com.github.zhuangjiaju.easytools.tools.base.excption.SystemException.
-
-of(SystemException.java:47)
-
-at com.github.zhuangjiaju.easytools.web.web.contoller.exception.ExceptionWebController.
-
-systemException(ExceptionWebController.java:40)
-
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.
-
-invoke(DirectMethodHandleAccessor.java:103)
-
-at java.base/java.lang.reflect.Method.
-
-invoke(Method.java:580)
-
-at org.springframework.web.method.support.InvocableHandlerMethod.
-
-doInvoke(InvocableHandlerMethod.java:255)
-
-at org.springframework.web.method.support.InvocableHandlerMethod.
-
-invokeForRequest(InvocableHandlerMethod.java:188)
-
-at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.
-
-invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-
-at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.
-
-invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
-
-at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.
-
-handleInternal(RequestMappingHandlerAdapter.java:831)
-
-at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.
-
-handle(AbstractHandlerMethodAdapter.java:87)
-
-at org.springframework.web.servlet.DispatcherServlet.
-
-doDispatch(DispatcherServlet.java:1089)
-
-at org.springframework.web.servlet.DispatcherServlet.
-
-doService(DispatcherServlet.java:979)
-
-at org.springframework.web.servlet.FrameworkServlet.
-
-processRequest(FrameworkServlet.java:1014)
-
-at org.springframework.web.servlet.FrameworkServlet.
-
-doGet(FrameworkServlet.java:903)
-
-at jakarta.servlet.http.HttpServlet.
-
-service(HttpServlet.java:564)
-
-at org.springframework.web.servlet.FrameworkServlet.
-
-service(FrameworkServlet.java:885)
-
-at jakarta.servlet.http.HttpServlet.
-
-service(HttpServlet.java:658)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:195)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.apache.tomcat.websocket.server.WsFilter.
-
-doFilter(WsFilter.java:51)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.springframework.web.filter.RequestContextFilter.
-
-doFilterInternal(RequestContextFilter.java:100)
-
-at org.springframework.web.filter.OncePerRequestFilter.
-
-doFilter(OncePerRequestFilter.java:116)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.springframework.web.filter.FormContentFilter.
-
-doFilterInternal(FormContentFilter.java:93)
-
-at org.springframework.web.filter.OncePerRequestFilter.
-
-doFilter(OncePerRequestFilter.java:116)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.springframework.web.filter.CharacterEncodingFilter.
-
-doFilterInternal(CharacterEncodingFilter.java:201)
-
-at org.springframework.web.filter.OncePerRequestFilter.
-
-doFilter(OncePerRequestFilter.java:116)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-internalDoFilter(ApplicationFilterChain.java:164)
-
-at org.apache.catalina.core.ApplicationFilterChain.
-
-doFilter(ApplicationFilterChain.java:140)
-
-at org.apache.catalina.core.StandardWrapperValve.
-
-invoke(StandardWrapperValve.java:167)
-
-at org.apache.catalina.core.StandardContextValve.
-
-invoke(StandardContextValve.java:90)
-
-at org.apache.catalina.authenticator.AuthenticatorBase.
-
-invoke(AuthenticatorBase.java:482)
-
-at org.apache.catalina.core.StandardHostValve.
-
-invoke(StandardHostValve.java:115)
-
-at org.apache.catalina.valves.ErrorReportValve.
-
-invoke(ErrorReportValve.java:93)
-
-at org.apache.catalina.core.StandardEngineValve.
-
-invoke(StandardEngineValve.java:74)
-
-at org.apache.catalina.connector.CoyoteAdapter.
-
-service(CoyoteAdapter.java:344)
-
-at org.apache.coyote.http11.Http11Processor.
-
-service(Http11Processor.java:389)
-
-at org.apache.coyote.AbstractProcessorLight.
-
-process(AbstractProcessorLight.java:63)
-
-at org.apache.coyote.AbstractProtocol$ConnectionHandler.
-
-process(AbstractProtocol.java:904)
-
-at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.
-
-doRun(NioEndpoint.java:1741)
-
-at org.apache.tomcat.util.net.SocketProcessorBase.
-
-run(SocketProcessorBase.java:52)
-
-at org.apache.tomcat.util.threads.ThreadPoolExecutor.
-
-runWorker(ThreadPoolExecutor.java:1190)
-
-at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.
-
-run(ThreadPoolExecutor.java:659)
-
-at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.
-
-run(TaskThread.java:63)
-
-at java.base/java.lang.Thread.
-
-run(Thread.java:1583)
-
-```
-
-### 使用 ExceptionHandler 拦截业务中抛出异常
-
-所有的异常转换 由`ExceptionConvertorUtils` 统一转换成输出 `ActionResult` 对象，并返回给前端
+Cglib 核心是生成了一个代理类，所以性能会比反射有优势。 我们先看一个列子，用反射和cglib分别设置一个值到一个对象中。
 
 ```java
 /**
- * 拦截Controller异常
- *
- * @author Jiaju Zhuang
+ * 最简单的cglib案例
+ * 设置一个值到一个对象中
  */
-@ControllerAdvice
-@Slf4j
-public class ControllerExceptionHandler {
+@Test
+public void beanMap() throws Exception {
+    // 我们需求是将 cglibDemo.name 设置成 "JiaJu Zhuang"
 
-    /**
-     * 业务异常
-     * 这里整合了spring常见的异常
-     *
-     * @param request   request
-     * @param exception exception
-     * @return return
-     */
-    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, IllegalArgumentException.class,
-        MissingServletRequestParameterException.class, MethodArgumentTypeMismatchException.class,
-        BusinessException.class, MaxUploadSizeExceededException.class, ClientAbortException.class,
-        HttpRequestMethodNotSupportedException.class, HttpMediaTypeNotAcceptableException.class,
-        MultipartException.class, MissingRequestHeaderException.class, HttpMediaTypeNotSupportedException.class,
-        ConstraintViolationException.class, HttpMessageNotReadableException.class})
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-    public ActionResult handleBusinessException(HttpServletRequest request, Exception exception) {
-        ActionResult result = ExceptionConvertorUtils.convert(exception);
-        log.info("发生业务异常{}:{}", request.getRequestURI(), result, exception);
-        return result;
-    }
+    // 用反射
+    CglibDemoDTO cglibDemo = new CglibDemoDTO();
+    Field nameField = CglibDemoDTO.class.getDeclaredField("name");
+    // 设置私有字段可访问
+    nameField.setAccessible(true);
+    nameField.set(cglibDemo, "JiaJu Zhuang");
+    log.info("设置结果:{}", cglibDemo.getName());
+    Assertions.assertEquals("JiaJu Zhuang", cglibDemo.getName());
 
-    /**
-     * 系统异常
-     *
-     * @param request   request
-     * @param exception exception
-     * @return return
-     */
-    @ExceptionHandler({SystemException.class})
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-    public ActionResult handleSystemException(HttpServletRequest request, Exception exception) {
-        ActionResult result = ExceptionConvertorUtils.convert(exception);
-        log.error("发生业务异常{}:{}", request.getRequestURI(), result, exception);
-        return result;
-    }
+    // 反射的性能相对较差，所以spring用了cglib代理，性能会更好的方案
 
-    /**
-     * 未知异常 需要人工介入查看日志
-     *
-     * @param request   request
-     * @param exception exception
-     * @return return
-     */
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-    public ActionResult handledException(HttpServletRequest request, Exception exception) {
-        ActionResult result = ExceptionConvertorUtils.convert(exception);
-        log.error("发生未知异常{}:{}:{},请求参数:{}", request.getRequestURI(),
-            ExceptionConvertorUtils.buildHeaderString(request), result,
-            JSON.toJSONString(request.getParameterMap()), exception);
-        return result;
-    }
-
+    // 用cglib
+    // cglib给我们提供了一个BeanMap的工具类，可以将一个对象转换成一个map，并且可以设置值
+    cglibDemo = new CglibDemoDTO();
+    BeanMap beanMap = BeanMap.create(cglibDemo);
+    beanMap.put("name", "JiaJu Zhuang");
+    log.info("设置结果:{}", cglibDemo.getName());
+    Assertions.assertEquals("JiaJu Zhuang", cglibDemo.getName());
 }
 
 ```
 
-### ExceptionConvertorUtils 根据不同的异常来转换异常信息
+是不是好好奇？Cglib 的 put 方法这么神奇，他就是做了啥？
 
-自己可以在 `EXCEPTION_CONVERTOR_MAP` 中加入更多的自定义异常，可以无限扩展
+### 查看生成后的源码
+
+我们通过` System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, path)` 方法来让 Cglib 输出生成的源码。
 
 ```java
-/**
- * 转换异常工具类
- *
- * @author Jiaju Zhuang
- */
-public class ExceptionConvertorUtils {
-
     /**
-     * 所有的异常处理转换器
-     */
-    public static final Map<Class<?>, ExceptionConvertor> EXCEPTION_CONVERTOR_MAP = Maps.newHashMap();
+ * 查看生成后的源码
+ */
+@Test
+public void showClass() {
+    // 我们只要设置输出一个路径，就可以看到生成的源码
+    // 打印到 easytools/easytools-test/target/test-classes/cglib
+    String path = this.getClass().getResource("/").getPath() + "cglib";
+    log.info("输出目录是：{}", path);
+    System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, path);
+    BeanMap.create(new CglibDemoDTO());
+}
+
+```
+
+先看 BeanMap 的 put 方法，非常简单，直接调用了一个抽象方法的put 方法。
+
+```java
+abstract public class BeanMap implements Map {
+    @Override
+    public Object put(Object key, Object value) {
+        return put(bean, key, value);
+    }
+
+    abstract public Object put(Object bean, Object key, Object value);
+}
+```
+
+生成的源码如下，他继承了BeanMap 所以直接看put方法：
+
+```java
+
+package com.github.zhuangjiaju.easytools.test.demo.cglib;
+
+import java.util.Set;
+
+import org.springframework.cglib.beans.BeanMap;
+import org.springframework.cglib.beans.FixedKeySet;
+
+public class CglibDemoDTO$$BeanMapByCGLIB$$fe3c380f extends BeanMap {
+    private static FixedKeySet keys;
+    private static final Class CGLIB$load_class$java$2Elang$2EString;
+
+    public CglibDemoDTO$$BeanMapByCGLIB$$fe3c380f() {
+    }
+
+    public BeanMap newInstance(Object var1) {
+        return new CglibDemoDTO$$BeanMapByCGLIB$$fe3c380f(var1);
+    }
+
+    public CglibDemoDTO$$BeanMapByCGLIB$$fe3c380f(Object var1) {
+        super(var1);
+    }
+
+    public Object get(Object var1, Object var2) {
+        CglibDemoDTO var10000 = (CglibDemoDTO)var1;
+        String var10001 = (String)var2;
+        switch (((String)var2).hashCode()) {
+            case 3373707:
+                if (var10001.equals("name")) {
+                    return var10000.getName();
+                }
+        }
+
+        return null;
+    }
+
+    public Object put(Object var1, Object var2, Object var3) {
+        CglibDemoDTO var10000 = (CglibDemoDTO)var1;
+        String var10001 = (String)var2;
+        // 这里用 switch 核心是加速，如果属性特别多，不用一个个equals，equals的性能不太好
+        switch (((String)var2).hashCode()) {
+            case 3373707:
+                // 判断是否是 name 属性
+                if (var10001.equals("name")) {
+                    String var10002 = var10000.getName();
+                    // 调用原始类的 setName 方法
+                    var10000.setName((String)var3);
+                    return var10002;
+                }
+        }
+
+        return null;
+    }
 
     static {
-        EXCEPTION_CONVERTOR_MAP.put(MethodArgumentNotValidException.class,
-            new MethodArgumentNotValidExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(BindException.class, new BindExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(BusinessException.class, new BusinessExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(MissingServletRequestParameterException.class, new ParamExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(IllegalArgumentException.class, new ParamExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(MethodArgumentTypeMismatchException.class,
-            new MethodArgumentTypeMismatchExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(MaxUploadSizeExceededException.class,
-            new MaxUploadSizeExceededExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(HttpRequestMethodNotSupportedException.class, new BusinessExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(ConstraintViolationException.class, new ConstraintViolationExceptionConvertor());
-        EXCEPTION_CONVERTOR_MAP.put(HttpMessageNotReadableException.class,
-            new ParamExceptionConvertor());
+        CGLIB$STATICHOOK1();
+        keys = new FixedKeySet(new String[] {"name"});
     }
 
-    /**
-     * 默认转换器
-     */
-    public static ExceptionConvertor DEFAULT_EXCEPTION_CONVERTOR = new DefaultExceptionConvertor();
-
-    /**
-     * 提取ConstraintViolationException中的错误消息
-     *
-     * @param e
-     * @return
-     */
-    public static String buildMessage(ConstraintViolationException e) {
-        if (e == null || CollectionUtils.isEmpty(e.getConstraintViolations())) {
-            return null;
-        }
-        int index = 1;
-        StringBuilder msg = new StringBuilder();
-        msg.append("请检查以下信息：");
-        for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
-            msg.append(index++);
-            // 得到错误消息
-            msg.append(SymbolConstant.DOT);
-            msg.append(" 字段(");
-            msg.append(constraintViolation.getPropertyPath());
-            msg.append(")传入的值为：\"");
-            msg.append(constraintViolation.getInvalidValue());
-            msg.append("\"，校验失败,原因是：");
-            msg.append(constraintViolation.getMessage());
-            msg.append(SymbolConstant.SEMICOLON);
-        }
-        return msg.toString();
+    static void CGLIB$STATICHOOK1() {
+        CGLIB$load_class$java$2Elang$2EString = Class.forName("java.lang.String");
     }
 
-    /**
-     * 提取BindingResult中的错误消息
-     *
-     * @param result
-     * @return
-     */
-    public static String buildMessage(BindingResult result) {
-        List<ObjectError> errors = result.getAllErrors();
-        if (CollectionUtils.isEmpty(errors)) {
-            return null;
-        }
-
-        int index = 1;
-        StringBuilder msg = new StringBuilder();
-        msg.append("请检查以下信息：");
-        for (ObjectError e : errors) {
-            msg.append(index++);
-            // 得到错误消息
-            msg.append(SymbolConstant.DOT);
-            msg.append(" ");
-            msg.append("字段(");
-            msg.append(e.getObjectName());
-            if (e instanceof FieldError) {
-                FieldError fieldError = (FieldError)e;
-                msg.append(SymbolConstant.DOT);
-                msg.append(fieldError.getField());
-            }
-            msg.append(")");
-            if (e instanceof FieldError) {
-                FieldError fieldError = (FieldError)e;
-                msg.append("传入的值为：\"");
-                msg.append(fieldError.getRejectedValue());
-                msg.append("\",");
-            }
-            msg.append("校验失败,原因是：");
-            msg.append(e.getDefaultMessage());
-            msg.append(SymbolConstant.SEMICOLON);
-        }
-        return msg.toString();
+    public Set keySet() {
+        return keys;
     }
 
-    /**
-     * 拼接头的日志信息
-     *
-     * @param request
-     * @return
-     */
-    public static String buildHeaderString(HttpServletRequest request) {
-        StringBuilder stringBuilder = new StringBuilder();
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String headName = headerNames.nextElement();
-            stringBuilder.append(headName);
-            stringBuilder.append(SymbolConstant.COLON);
-            stringBuilder.append(request.getHeader(headName));
-            stringBuilder.append(SymbolConstant.COMMA);
+    public Class getPropertyType(String var1) {
+        switch (var1.hashCode()) {
+            case 3373707:
+                if (var1.equals("name")) {
+                    return CGLIB$load_class$java$2Elang$2EString;
+                }
         }
-        return stringBuilder.toString();
-    }
 
-    /**
-     * 转换结果
-     *
-     * @param exception
-     * @return
-     */
-    public static ActionResult convert(Throwable exception) {
-        ExceptionConvertor exceptionConvertor = EXCEPTION_CONVERTOR_MAP.get(exception.getClass());
-        if (exceptionConvertor == null) {
-            exceptionConvertor = DEFAULT_EXCEPTION_CONVERTOR;
-        }
-        return exceptionConvertor.convert(exception);
+        return null;
     }
-
 }
 
 ```
 
-### 拿一个 ParamExceptionConvertor 参数异常举例
+是不是很简单？他就是直接调用了原始类的 setName 方法，没有任何技术含量。
+
+### 我们自己来实现下代理
+
+Spring 使用的 Cglib 动态代理，是不是和下面的差不多。 我们对用 setName 方法做一个增强，都改成 name+" 你真棒！！！"
 
 ```java
-
 /**
- * 参数异常 目前包括
- * ConstraintViolationException
- * MissingServletRequestParameterException
- * IllegalArgumentException
- * HttpMessageNotReadableException
- *
- * @author Jiaju Zhuang
+ * 我们自己来实现下代理
+ * 调用setName 都改成 name+" 你真棒！！！"
  */
-public class ParamExceptionConvertor implements ExceptionConvertor<Throwable> {
+@Test
+public void proxy() {
+    // 我们只要设置输出一个路径，就可以看到生成的源码
+    // 打印到 easytools/easytools-test/target/test-classes/cglib
+    String path = this.getClass().getResource("/").getPath() + "cglib";
+    log.info("输出目录是：{}", path);
+    System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, path);
 
-    @Override
-    public ActionResult convert(Throwable exception) {
-        return ActionResult.fail(CommonExceptionEnum.INVALID_PARAMETER, exception.getMessage());
-    }
+    // 新建增强器
+    Enhancer enhancer = new Enhancer();
+    // 父类是CglibDemoDTO
+    enhancer.setSuperclass(CglibDemoDTO.class);
+    enhancer.setCallback((MethodInterceptor)(obj, method, args, proxy) -> {
+        // 判断setName方法且是String
+        if (method.getName().equals("setName") && args[0] != null && args[0] instanceof String) {
+            String name = (String)args[0];
+            // 修改参数
+            args[0] = name + " 你真棒！！！";
+        }
+        // 继续调用父类
+        return proxy.invokeSuper(obj, args);
+    });
+    CglibDemoDTO cglibDemo = (CglibDemoDTO)enhancer.create();
+    cglibDemo.setName("JiaJu Zhuang");
+    log.info("输出结果:{},{}", cglibDemo.getName(), cglibDemo.getClass());
+    Assertions.assertEquals("JiaJu Zhuang 你真棒！！！", cglibDemo.getName());
 }
 
+```
+
+输出结果：
+
+```text
+20:40:12.644 [main] INFO com.github.zhuangjiaju.easytools.test.demo.cglib.CglibTest -- 输出结果:JiaJu Zhuang 你真棒！！！,class com.github.zhuangjiaju.easytools.test.demo.cglib.CglibDemoDTO$$EnhancerByCGLIB$$6be31ec5
 
 ```
+
+可以看到已经能输出 `JiaJu Zhuang 你真棒！！！` 了，而不是原来的 `JiaJu Zhuang`。
+
+我们直接看下生成的代理类 `com.github.zhuangjiaju.easytools.test.demo.cglib.CglibDemoDTO$$EnhancerByCGLIB$$6be31ec5` 他继承了
+CglibDemoDTO类， 然后重写了 `setName` 方法,并用`final`修饰。
+
+```java
+public class CglibDemoDTO$$EnhancerByCGLIB$$6be31ec5 extends CglibDemoDTO implements Factory {
+
+    // 省略了很多方法
+
+    public final void setName(String var1) {
+        MethodInterceptor var10000 = this.CGLIB$CALLBACK_0;
+        if (var10000 == null) {
+            CGLIB$BIND_CALLBACKS(this);
+            var10000 = this.CGLIB$CALLBACK_0;
+        }
+
+        // 判断有没有MethodInterceptor 有的话直接调用
+        if (var10000 != null) {
+            // 直接调用我们的 匿名内部类了
+            var10000.intercept(this, CGLIB$setName$1$Method, new Object[] {var1}, CGLIB$setName$1$Proxy);
+        } else {
+            super.setName(var1);
+        }
+    }
+
+    // 省略了很多方法
+}
+```
+
+是不是也特别简单，就是一个简单回调。
+
+### 补充问题：Cglib 能不能代理 final 类？能不能代理 final 方法？
+
+这个就不用我多说了吧，我们看到了生成的代理类，他继承了我们的原始类，原始类是 final 的话，会导致无法代理。
+
+代理方法也一样，如果是 final 方法，子类无法重写父类的 final 方法，所以也无法代理。
+
+这里有个有趣的现象，被代理的方法也是 final 的，所以生成的代理也无法被再次代理了。
 
 ### 总结
 
-这样子我们就完成了全局异常处理，再也不用担心整个项目的 `try-catch` 代码了。
+通过这篇文章大家是不是对吹的神乎其技的 Cglib 有了新的理解，实际上他比大家想象的容易非常多，只是大家没有时间去实践一下，大家去动手试试吧，试过才是自己的。
 
 ## 写在最后
 

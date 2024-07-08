@@ -91,7 +91,7 @@ public class CglibTest extends SimpleBaseTest {
         });
         CglibDemoDTO cglibDemo = (CglibDemoDTO)enhancer.create();
         cglibDemo.setName("JiaJu Zhuang");
-        log.info("输出结果:{}", cglibDemo.getName());
+        log.info("输出结果:{},{}", cglibDemo.getName(), cglibDemo.getClass());
         Assertions.assertEquals("JiaJu Zhuang 你真棒！！！", cglibDemo.getName());
     }
 
