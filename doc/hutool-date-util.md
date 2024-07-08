@@ -8,8 +8,7 @@ Hutool 是一个小而全的Java工具类库，通过静态方法封装，降低
 
 ### 推荐说明
 
-相对于我们自己项目中写的 DateUtil ,Hutool 的 DateUtil 会强大非常多，也有更多的人帮忙测试，相对于 apache 的 DateUtil 来说
-Hutool 的 API 会多非常多，也更符合国人习惯，自从用了 Hutool 之后，我项目中自己再也没写过 DateUtil 了。
+相对于我们自己项目中写的 DateUtil ,Hutool 的 DateUtil 会强大非常多，也有更多的人帮忙测试，相对于 apache 的 DateUtil 来说 Hutool 的 API 会多非常多，也更符合国人习惯，自从用了 Hutool 之后，我项目中自己再也没写过 DateUtil 了。
 
 ## 最佳实践
 
