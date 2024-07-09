@@ -24,8 +24,10 @@ java卓越工程实战, 让你的代码变得更加优雅。
 
 ## 源码解析
 
-* [大厂面试必备系列：一文彻底搞懂 Cglib 代理](doc/cglib.md)
+* [大厂面试必备系列：一文彻底搞懂 Cglib 代理](doc/cglib-proxy.md)
+* [大厂面试必备系列：一文彻底搞懂 Jdk 动态代理](doc/jdk-proxy.md)
 
 ## 工具推荐
 
 * [还在代码中写DateUtil?是时候说再见啦](doc/hutool-date-util.md)
+* [还在代码中写HttpUtil?是时候说再见啦](doc/hutool-http-util.md)
