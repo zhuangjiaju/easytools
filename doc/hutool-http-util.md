@@ -8,7 +8,7 @@ Hutool 是一个小而全的Java工具类库，通过静态方法封装，降低
 
 ### 推荐说明
 
-HttpUtil 封装了 HttpUrlConnection 让http 请求的代码变的非常简介，再也不用在项目总自己写 HttpUtil了。
+HttpUtil 封装了 HttpUrlConnection 让http 请求的代码变的非常简洁，再也不用在项目中自己写 HttpUtil了。
 
 ## 最佳实践
 
