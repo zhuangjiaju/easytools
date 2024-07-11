@@ -18,6 +18,15 @@
             <groupId>com.github.zhuangjiaju</groupId>
             <artifactId>easytools-start</artifactId>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
