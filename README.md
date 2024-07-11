@@ -8,6 +8,12 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * 大家代码规范统一，提高代码的可读性
 * 提供各种实战案例，提升你的编码能力
 
+# 项目地址
+
+* [GitHub](https://github.com/zhuangjiaju/easytools)
+* [gitee](https://gitee.com/zhuangjiaju/easytools)
+* [CSDN](https://blog.csdn.net/fish7790714)
+
 # 帮忙点个⭐Star
 
 开源不易，如果觉得EasyTools对您的工作还是有帮助的话，请帮忙在<a target="_blank" href='https://github.com/zhuangjiaju/easytools'><img src="https://img.shields.io/github/stars/zhuangjiaju/easytools.svg?style=flat-square&label=Stars&logo=github" alt="github star"/></a>
@@ -26,7 +32,7 @@ java卓越工程实战, 让你的代码变得更加优雅。
 
 * [大厂面试必备系列：一文彻底搞懂 Cglib 代理](doc/cglib-proxy.md)
 * [大厂面试必备系列：一文彻底搞懂 Jdk 动态代理](doc/jdk-proxy.md)
-* Java对象复制系列一: Apache 这么常用的工具类，性能居然如此差？
+* [Java对象复制系列一: Apache 这么常用的工具类，性能居然如此差？](doc/bean-utils-test.md)
 * Java对象复制系列二: Apache BeanUtils 源码解析
 * Java对象复制系列三: Spring BeanUtils 源码解析
 * Java对象复制系列四: MapperStruct 基础
@@ -36,4 +42,5 @@ java卓越工程实战, 让你的代码变得更加优雅。
 
 * [还在代码中写DateUtil?是时候说再见啦](doc/hutool-date-util.md)
 * [还在代码中写HttpUtil?是时候说再见啦](doc/hutool-http-util.md)
+* [java 如何一行代码生成随机数据？](doc/hutool-random-util.md)
 
