@@ -2,6 +2,8 @@
 
 ## 前言
 
+Apache BeanUtils 是Java中用来复制2个对象属性的一个类型。
+
 上一篇文章我们讲到了 Apache BeanUtils 性能相对比较差，今天我不仅仅要带你学习源代码 ，更要带你手把手写一个Apache BeanUtils。
 
 ## 最佳实践
