@@ -33,7 +33,7 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [大厂面试必备系列：一文彻底搞懂 Cglib 代理](doc/cglib-proxy.md)
 * [大厂面试必备系列：一文彻底搞懂 Jdk 动态代理](doc/jdk-proxy.md)
 * [Java对象复制系列一: Apache 这么常用的工具类，性能居然如此差？](doc/bean-utils-test.md)
-* Java对象复制系列二: Apache BeanUtils 源码解析
+* [Java对象复制系列二: 手把手带你写一个Apache BeanUtils](doc/bean-utils-apache.md)
 * Java对象复制系列三: Spring BeanUtils 源码解析
 * Java对象复制系列四: MapperStruct 基础
 * Java对象复制系列五: MapperStruct & spring 高阶
@@ -43,4 +43,5 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [还在代码中写DateUtil?是时候说再见啦](doc/hutool-date-util.md)
 * [还在代码中写HttpUtil?是时候说再见啦](doc/hutool-http-util.md)
 * [java 如何一行代码生成随机数据？](doc/hutool-random-util.md)
+* [用 Hutool 一行代码搞定压缩、解压缩](doc/hutool-zip-util.md)
 
