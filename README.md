@@ -38,10 +38,12 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * Java对象复制系列四: MapperStruct 基础
 * Java对象复制系列五: MapperStruct & spring 高阶
 
-## 工具推荐
+## 以下是水文
 
 * [还在代码中写DateUtil?是时候说再见啦](doc/hutool-date-util.md)
 * [还在代码中写HttpUtil?是时候说再见啦](doc/hutool-http-util.md)
 * [java 如何一行代码生成随机数据？](doc/hutool-random-util.md)
 * [用 Hutool 一行代码搞定压缩、解压缩](doc/hutool-zip-util.md)
+* [Java 如何不用再每次新建线程，直接使用公共线程池](doc/hutool-thread-util.md)
+* [Java 图片缩放、裁剪、水印神器](doc/hutool-img-util.md)
 
