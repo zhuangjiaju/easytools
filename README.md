@@ -46,4 +46,6 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [用 Hutool 一行代码搞定压缩、解压缩](doc/hutool-zip-util.md)
 * [Java 如何不用再每次新建线程，直接使用公共线程池](doc/hutool-thread-util.md)
 * [Java 图片缩放、裁剪、水印神器](doc/hutool-img-util.md)
+* [Java 如何快速根据 key 获取枚举的值？](doc/hutool-enum-util.md)
+* [Java 一行代码如何扫描一个包下面所有的类？](doc/hutool-class-util.md)
 
