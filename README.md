@@ -8,7 +8,7 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * 大家代码规范统一，提高代码的可读性
 * 提供各种实战案例，提升你的编码能力
 
-# 项目地址
+# 本项目地址
 
 * [GitHub](https://github.com/zhuangjiaju/easytools)
 * [gitee](https://gitee.com/zhuangjiaju/easytools)
