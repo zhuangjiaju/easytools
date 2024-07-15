@@ -36,8 +36,6 @@ public class BeanUtilsTest extends SimpleBaseTest {
         doDemo(randomList(100000));
     }
 
-
-
     /**
      * 调用对象复制
      *
@@ -63,7 +61,7 @@ public class BeanUtilsTest extends SimpleBaseTest {
         log.info("Spring BeanUtils 开始处理");
         for (BeanUtilsDemoDTO beanUtilsDemo : randomList) {
             BeanUtilsDemoDTO newBeanUtilsDemo = new BeanUtilsDemoDTO();
-            org.springframework.beans.BeanUtils.copyProperties(newBeanUtilsDemo, beanUtilsDemo);
+            org.springframework.beans.BeanUtils.copyProperties(beanUtilsDemo, newBeanUtilsDemo);
         }
         log.info("Spring BeanUtils 结束处理处理，耗时：{}ms", interval.intervalRestart());
 

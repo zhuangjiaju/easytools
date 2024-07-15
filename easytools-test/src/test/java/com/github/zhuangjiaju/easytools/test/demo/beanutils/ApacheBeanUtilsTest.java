@@ -40,11 +40,11 @@ public class ApacheBeanUtilsTest extends SimpleBaseTest {
         beanUtilsDemo.setFirstName("firstName");
 
         BeanUtilsDemoDTO newBeanUtilsDemo = new BeanUtilsDemoDTO();
-        MyBeanUtils.copyProperties(newBeanUtilsDemo, beanUtilsDemo);
+        MyApacheBeanUtils.copyProperties(newBeanUtilsDemo, beanUtilsDemo);
         log.info("newBeanUtilsDemo: {}", newBeanUtilsDemo);
     }
 
-    public static class MyBeanUtils {
+    public static class MyApacheBeanUtils {
 
         /**
          * 复制方法

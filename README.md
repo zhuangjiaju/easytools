@@ -33,10 +33,12 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [大厂面试必备系列：一文彻底搞懂 Cglib 代理](doc/cglib-proxy.md)
 * [大厂面试必备系列：一文彻底搞懂 Jdk 动态代理](doc/jdk-proxy.md)
 * [Java对象复制系列一: Apache 这么常用的工具类，性能居然如此差？](doc/bean-utils-test.md)
-* [Java对象复制系列二: 手把手带你写一个Apache BeanUtils](doc/bean-utils-apache.md)
-* Java对象复制系列三: Spring BeanUtils 源码解析
-* Java对象复制系列四: MapperStruct 基础
-* Java对象复制系列五: MapperStruct & spring 高阶
+* [Java对象复制系列二: 手把手带你写一个 Apache BeanUtils](doc/bean-utils-apache.md)
+* [Java对象复制系列三: 手把手带你写一个 Spring BeanUtils](doc/bean-utils-spring.md)
+* Java对象复制系列四: MapperStruct 基础 + 性能对比
+* Java对象复制系列五: MapperStruct 高阶 + spring 
+* Java对象复制系列六: 手写？
+
 
 ## 以下是水文
 
@@ -48,4 +50,5 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java 图片缩放、裁剪、水印神器](doc/hutool-img-util.md)
 * [Java 如何快速根据 key 获取枚举的值？](doc/hutool-enum-util.md)
 * [Java 一行代码如何扫描一个包下面所有的类？](doc/hutool-class-util.md)
+* [还在用 System.currentTimeMillis() 计时？试试 Hutool 的 TimeInterval](doc/hutool-time-interval.md)
 
