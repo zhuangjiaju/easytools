@@ -11,6 +11,7 @@
 ### 直接上案例
 
 案例地址GitHub： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-test/src/test/java/com/github/zhuangjiaju/easytools/test/demo/beanutils/SpringBeanUtilsTest.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-test/src/test/java/com/github/zhuangjiaju/easytools/test/demo/beanutils/SpringBeanUtilsTest.java)
+
 案例地址gitee： [https://gitee.com/zhuangjiaju/easytools/blob/main/easytools-test/src/test/java/com/github/zhuangjiaju/easytools/test/demo/beanutils/SpringBeanUtilsTest.java](https://gitee.com/zhuangjiaju/easytools/blob/main/easytools-test/src/test/java/com/github/zhuangjiaju/easytools/test/demo/beanutils/SpringBeanUtilsTest.java)
 
 需要上一期的教程自己去主页翻。
