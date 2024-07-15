@@ -38,6 +38,16 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * Java对象复制系列四: MapperStruct 基础 + 性能对比
 * Java对象复制系列五: MapperStruct 高阶 + spring 
 * Java对象复制系列六: 手写？
+* 手写HashMap的put方法
+* 完整手写一个HashMap
+* 手写一个MyBaits
+* MyBaits 源码解析
+
+## EasyExcel 源码解析
+* 了解csv 、xls、xlsx的区别
+* 设计原理
+* 手写读excel
+* 手写写excel
 
 
 ## 以下是水文
