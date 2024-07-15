@@ -360,6 +360,6 @@ Spring 源码就这么简单，总结下来就是 解析成PropertyDescriptor ->
 
 ## 写在最后
 
-给大家推荐一个非常完整的Java项目搭建的最佳实践,也是本文的源码出处，由大厂程序员&EasyExcel作者维护。
-github地址：[https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools)
+给大家推荐一个非常完整的Java项目搭建的最佳实践,也是本文的源码出处，由大厂程序员&EasyExcel作者维护。   
+github地址：[https://github.com/zhuangjiaju/easytools](https://github.com/zhuangjiaju/easytools)   
 gitee地址：[https://gitee.com/zhuangjiaju/easytools](https://gitee.com/zhuangjiaju/easytools)
