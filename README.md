@@ -27,6 +27,9 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [告别代码中遍地的 try-catch，使用 spring 全局统一异常处理](doc/controller-exception-handler.md)
 * [基于hibernate-validator,java前端入参校验最佳实践](doc/hibernate-validator.md)
 * [java 开源项目是如何将多个 module 版本统一配置的？](doc/flatten-maven-plugin.md)
+* 项目中使用traceId 来整个链路最终
+* 一个好的项目目录结构是什么样子的？
+* 不使用join 到底是怎么写sql的？
 
 ## 源码解析
 

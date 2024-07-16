@@ -4,7 +4,7 @@
 
 上一节我带大家手写了一个 Apache BeanUtils，并阅读了源码，大家应该都自己去阅读过源码了吧？
 
-今天我大家手写一个 Spring BeanUtils，不像 Apache BeanUtils 我们就写了一个简单的案例，这次我们要写一个完整的 Spring BeanUtils 并带上和 Apache BeanUtils ,看看我们自己写的和 Apache BeanUtils 性能会有啥差别？
+今天我大家手写一个 Spring BeanUtils，不像 Apache BeanUtils 我们就写了一个简单的案例，这次我们要写一个完整的 Spring BeanUtils 并带上和 Apache BeanUtils 的性能对比图,看看我们自己写的和 Apache BeanUtils 性能会有啥差别？
 
 ## 最佳实践
 

@@ -1,4 +1,4 @@
-# Java对象复制系列四:还在使用 Spring BeanUtils？这个工具性能秒杀它
+# Java对象复制系列四:还在使用 Spring BeanUtils 复制属性？这个工具性能秒杀它
 
 ## 前言
 
