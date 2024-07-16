@@ -6,6 +6,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * 转换器
+ *
+ * @author Jiaju Zhuang
+ */
 @Mapper
 public interface MapperStructMapper {
 

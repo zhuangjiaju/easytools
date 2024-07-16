@@ -38,7 +38,7 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java对象复制系列一: Apache 这么常用的工具类，性能居然如此差？](doc/bean-utils-test.md)
 * [Java对象复制系列二: 手把手带你写一个 Apache BeanUtils](doc/bean-utils-apache.md)
 * [Java对象复制系列三: 手把手带你写一个 Spring BeanUtils](doc/bean-utils-spring.md)
-* Java对象复制系列四: MapperStruct 基础 + 性能对比
+* [Java对象复制系列四: 还在使用 Spring BeanUtils 复制属性？这个工具性能秒杀它](doc/mapper-struct-demo.md)
 * Java对象复制系列五: MapperStruct 高阶 + spring 
 * Java对象复制系列六: 手写？
 * 手写HashMap的put方法
@@ -64,4 +64,4 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java 如何快速根据 key 获取枚举的值？](doc/hutool-enum-util.md)
 * [Java 一行代码如何扫描一个包下面所有的类？](doc/hutool-class-util.md)
 * [还在用 System.currentTimeMillis() 计时？试试 Hutool 的 TimeInterval](doc/hutool-time-interval.md)
-
+* [Java 中怎么解决 0.1 + 0.2 不等于 0.3？](doc/hutool-number-util.md)
