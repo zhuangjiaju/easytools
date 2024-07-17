@@ -2,19 +2,15 @@ package com.github.zhuangjiaju.easytools.web.web.contoller.mapperstruct;
 
 import com.alibaba.fastjson2.JSON;
 
-import cn.hutool.core.lang.Validator;
-import com.github.zhuangjiaju.easytools.domain.demo.api.service.result.ResultDemoService;
-import com.github.zhuangjiaju.easytools.tools.base.excption.CommonExceptionEnum;
-import com.github.zhuangjiaju.easytools.tools.base.wrapper.result.ActionResult;
-import com.github.zhuangjiaju.easytools.web.web.contoller.result.ResultWebConverter;
-import com.github.zhuangjiaju.easytools.web.web.contoller.valid.request.ValidRequest;
-import jakarta.validation.Valid;
+import com.github.zhuangjiaju.easytools.domain.demo.api.service.mapperstruct.MapperStructDTO;
+import com.github.zhuangjiaju.easytools.domain.demo.api.service.mapperstruct.MapperStructDemoService;
+import com.github.zhuangjiaju.easytools.tools.base.wrapper.result.DataResult;
+import com.github.zhuangjiaju.easytools.web.web.contoller.mapperstruct.vo.MapperStructQueryVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,48 +21,28 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/web/valid")
+@RequestMapping("/api/web/mapper-struct")
 public class MapperStructWebController {
-    private final ResultDemoService resultDemoService;
-    private final ResultWebConverter resultWebConverter;
+    private final MapperStructDemoService mapperStructDemoService;
+    private final MapperStructWebMapper mapperStructWebMapper;
 
     /**
-     * 校验数据
-     * 加了 @Valid 就可以自动校验参数了
+     * 查询一条数据
      *
-     * @param request 参数
-     * @return id
-     */
-    @PostMapping("valid")
-    public ActionResult valid(@Valid @RequestBody ValidRequest request) {
-        // 做业务逻辑
-        log.info("请求参数:{}", JSON.toJSONString(request));
-        return ActionResult.isSuccess();
-    }
-
-    /**
-     * 坏的案例
-     * 这里会有很多冗余的代码
-     * 而且如果写成所有异常一起提示更复杂
-     *
+     * @param id
      * @return
      */
-    @RequestMapping(value = "/base-case")
-    public ActionResult baseCase(@RequestBody ValidRequest request) {
-        if (request.getId() == null) {
-            return ActionResult.fail(CommonExceptionEnum.INVALID_PARAMETER, "id不能为空");
-        }
-        if (!Validator.isEmail(request.getEmail())) {
-            return ActionResult.fail(CommonExceptionEnum.INVALID_PARAMETER, "邮箱格式不正确");
-        }
-        if (StringUtils.length(request.getName()) > 10) {
-            return ActionResult.fail(CommonExceptionEnum.INVALID_PARAMETER, "名字最长为10个字符串");
-        }
-        if (!Validator.isMobile(request.getMobile())) {
-            return ActionResult.fail(CommonExceptionEnum.INVALID_PARAMETER, "手机格式不正确");
-        }
-        // 做业务逻辑
-        log.info("请求参数:{}", JSON.toJSONString(request));
-        return ActionResult.isSuccess();
+    @GetMapping("query")
+    public DataResult<MapperStructQueryVO> query(@RequestParam("id") Long id) {
+        MapperStructDTO data = mapperStructDemoService.queryExistent(id);
+        // 转换需求如下：
+        // 1. 将一个 json 字符串 转成一个数组
+        // 2. 将一个 用户的DTO对象转成VO对象
+        // 3. 放入一个当前的日期
+        // 4. 放入一个唯一id
+        MapperStructQueryVO vo = mapperStructWebMapper.dto2vo(data);
+        log.info("转换前:{}，转换后:{}", JSON.toJSONString(data), JSON.toJSONString(vo));
+        return DataResult.of(vo);
     }
+
 }
