@@ -40,7 +40,7 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java对象复制系列三: 手把手带你写一个 Spring BeanUtils](doc/bean-utils-spring.md)
 * [Java对象复制系列四: 还在使用 Spring BeanUtils 复制属性？这个工具性能秒杀它](doc/mapper-struct-demo.md)
 * [Java对象复制系列五: 最快速度、方便的对象复制工具 Mapper Struct 的高阶应用](doc/mapper-struct-spring.md)
-* [Java对象复制系列五: 史上最快的对象复制工具 Mapper Struct 原理浅析](doc/mapper-struct-detail.md)
+* [Java对象复制系列六: 史上最快的对象复制工具 Mapper Struct 原理浅析](doc/mapper-struct-detail.md)
 * 手写HashMap的put方法
 * 完整手写一个HashMap
 * 手写一个MyBaits
