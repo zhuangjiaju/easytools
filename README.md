@@ -41,17 +41,17 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java对象复制系列四: 还在使用 Spring BeanUtils 复制属性？这个工具性能秒杀它](doc/mapper-struct-demo.md)
 * [Java对象复制系列五: 最快速度、方便的对象复制工具 Mapper Struct 的高阶应用](doc/mapper-struct-spring.md)
 * [Java对象复制系列六: 史上最快的对象复制工具 Mapper Struct 原理浅析](doc/mapper-struct-detail.md)
-* 手写HashMap的put方法
+* [手把手带你写一个精简版 HashMap 的 put 方法](doc/hash-map-put.md)
 * 完整手写一个HashMap
 * 手写一个MyBaits
 * MyBaits 源码解析
 
 ## EasyExcel 源码解析
+
 * 了解csv 、xls、xlsx的区别
 * 设计原理
 * 手写读excel
 * 手写写excel
-
 
 ## 以下是水文
 
@@ -67,3 +67,4 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java 中怎么解决 0.1 + 0.2 不等于 0.3？](doc/hutool-number-util.md)
 * [Java 中最全的 hash 算法集合](doc/hutool-hash-util.md)
 * [Java 中快速生成唯一id](doc/hutool-id-util.md)
+* [Java 如何提取身份证中的生日](doc/hutool-idcard-util.md)
