@@ -68,3 +68,5 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java 中最全的 hash 算法集合](doc/hutool-hash-util.md)
 * [Java 中快速生成唯一id](doc/hutool-id-util.md)
 * [Java 如何提取身份证中的生日](doc/hutool-idcard-util.md)
+* [Java 中如何获取一个中文的拼音](doc/hutool-pinyin-util.md)
+* [Java 中如何支持任意格式的压缩和解压缩](doc/hutool-compress-util.md)
