@@ -53,4 +53,49 @@ public class HashMapTest extends SimpleBaseTest {
         Assertions.assertEquals(15, myHashMap.getSize());
         Assertions.assertEquals(32, myHashMap.getTable().length);
     }
+
+    /**
+     * 测试 HashMap 的 get 方法
+     */
+    @Test
+    public void getTest() throws Exception {
+        MyHashMap<String, String> myHashMap = new MyHashMap<>();
+        // 放入15条 理论上来扩容过一次
+        for (int i = 0; i < 15; i++) {
+            myHashMap.put("key" + i, "value" + i);
+        }
+        log.info("放置后的数组:{}", JSON.toJSONString(myHashMap.getTable()));
+        Assertions.assertEquals(15, myHashMap.getSize());
+        Assertions.assertEquals(32, myHashMap.getTable().length);
+        // 20条数据测试下
+        for (int i = 0; i < 15; i++) {
+            Assertions.assertEquals("value" + i, myHashMap.get("key" + i));
+        }
+
+        Assertions.assertEquals(15, myHashMap.getSize());
+        Assertions.assertEquals(32, myHashMap.getTable().length);
+    }
+
+    /**
+     * 测试 HashMap 的 remove 方法
+     */
+    @Test
+    public void removeTest() throws Exception {
+        MyHashMap<String, String> myHashMap = new MyHashMap<>();
+        // 放入15条
+        for (int i = 0; i < 15; i++) {
+            myHashMap.put("key" + i, "value" + i);
+        }
+        log.info("放置后的数组:{}", JSON.toJSONString(myHashMap.getTable()));
+        Assertions.assertEquals(15, myHashMap.getSize());
+        Assertions.assertEquals(32, myHashMap.getTable().length);
+        // 移除10条数据
+        for (int i = 0; i < 10; i++) {
+            myHashMap.remove("key" + i);
+        }
+        log.info("移除后的数组:{}", JSON.toJSONString(myHashMap.getTable()));
+
+        Assertions.assertEquals(5, myHashMap.getSize());
+        Assertions.assertEquals(32, myHashMap.getTable().length);
+    }
 }
