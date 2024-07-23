@@ -24,6 +24,7 @@
         <module>easytools-test</module>
         <module>easytools-tools</module>
         <module>easytools-web</module>
+        <module>easytools-source-code</module>
     </modules>
 
     <dependencyManagement>
