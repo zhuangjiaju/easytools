@@ -44,7 +44,7 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [手把手带你写一个精简版 HashMap 的 put 方法](doc/hash-map-put.md)
 * [手把手带你写一个精简版 HashMap 的 get 方法](doc/hash-map-get.md)
 * [史上最详细的 HashMap 的 put 方法的源码注释](doc/hash-map-put-source.md)
-* Hashmap源码解析
+* [史上最详细的 HashMap 的 get 方法的源码注释](doc/hash-map-get-source.md)
 * i++
 * jdk21 虚拟线程
 * jdk8 lambda
@@ -75,3 +75,4 @@ java卓越工程实战, 让你的代码变得更加优雅。
 * [Java 中如何支持任意格式的压缩和解压缩](doc/hutool-compress-util.md)
 * [Java 中如何快速读取 CSV 文件](doc/hutool-csv-util.md)
 * [Java 如何获取一个 class 的所有属性和方法](doc/hutool-reflect-util.md)
+* [Java 中如何执行命令行方法](doc/hutool-runtime-util.md)
