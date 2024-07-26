@@ -14,9 +14,9 @@ HashMap 大家工作中遇到的太多了，已经成了必须使用的类了，
 
 ### 直接上案例
 
-案例地址GitHub： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java.util/HashMap.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java.util/HashMap.java)
+案例地址GitHub： [https://github.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java/util/HashMap.java](https://github.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java/util/HashMap.java)
 
-案例地址gitee： [https://gitee.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java.util/HashMap.java](https://gitee.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java.util/HashMap.java)
+案例地址gitee： [https://gitee.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java/util/HashMap.java](https://gitee.com/zhuangjiaju/easytools/blob/main/easytools-source-code/java21/src/main/java/java/util/HashMap.java)
 
 ### 首先我们看 HashMap 的构造方法
 
